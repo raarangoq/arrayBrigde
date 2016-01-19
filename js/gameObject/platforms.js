@@ -2,14 +2,16 @@
 
 function addPlatforms(){
 	platforms.array = [];
-	platforms.upFire = false;
-	platforms.timeToUpFires = game.time.now; 
+	platforms.firesPerLevel = [0, 1, 2, 2, 3];
+
+//	platforms.upFire = false;
+//	platforms.timeToUpFires = game.time.now; 
 
 	for(var i=0; i<10; i++){
 		platforms.array[i] = game.add.sprite(30 + i * 70, 300, 'platform');
 		game.physics.enable(platforms.array[i], Phaser.Physics.ARCADE);
 		platforms.array[i].body.immovable = true;
-		platforms.array[i].text = platforms.array[i].addChild( game.add.text(30, 10, i + 1, 
+		platforms.array[i].text = platforms.array[i].addChild( game.add.text(30, 10, i, 
     		{ font: '14px ferney', fill: '#fff', stroke: '#000000', strokeThickness: 3 }) );
 
 		platforms.array[i].fire = platforms.array[i].addChild(addFire());
@@ -18,8 +20,8 @@ function addPlatforms(){
 		platforms.array[i].damage = 30;
 	}
 
-	platforms.fireOff = platformsFireOff;
-	platforms.fireOn = platformsFireOn;
+//	platforms.fireOff = platformsFireOff;
+//	platforms.fireOn = platformsFireOn;
 
 
 	platforms.update = updatePlatforms;
@@ -38,24 +40,24 @@ function addFire () {
 }
 
 function updatePlatforms(){
-	if(this.upFire){
+/*	if(this.upFire){
 		if(game.time.now > this.timeToUpFires ){
 			this.upFire = false;
 			this.setPlatforms();
 		}
-	}
+	}*/
 }
 
-function platformsFireOff(){
+/*function platformsFireOff(){
 	for(var i=0; i<10; i++){
 		this.array[i].fire.visible = false;
 	}
-}
+}*/
 
-function platformsFireOn(){
+/*function platformsFireOn(){
 	this.upFire = true;
 	this.timeToUpFires = game.time.now + 3000;
-}
+}*/
 
 function setPlatformsAlive(value){
 
@@ -75,7 +77,7 @@ function setPlatformsAlive(value){
 function setFirePlatforms(){
 	var i=0;
 	var number;
-	while (i < game.global.level){
+	while (i < this.firesPerLevel[game.global.level - 1]){
 		number = Math.floor(Math.random() * 10);
 		if(this.array[number].fire.visible == false){
 			i++;

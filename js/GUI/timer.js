@@ -41,9 +41,9 @@ function updateTimer(){
     var time = Math.floor((this.levelTime - (game.time.now - this.initLevelTime)) / 1000);
     if(time > 0){
     	this.text += time;
-    	if(time <= 3){
-            platforms.fireOff();
-        }
+//    	if(time <= 3){
+//            platforms.fireOff();
+//        }
     }
     else{
     	this.text += '0';
@@ -51,8 +51,8 @@ function updateTimer(){
         if(this.counter >= gui.equation.numberOfEquations){
             this.timeLastEquation = game.time.now;
         }
-        else
-            platforms.fireOn();
+//        else
+//            platforms.fireOn();
 
     	stones.dropStone();
         

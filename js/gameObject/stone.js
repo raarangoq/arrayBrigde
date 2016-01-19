@@ -26,7 +26,7 @@ function dropStone(){
     for(var i=0; i<10; i++){
 
     	stone = this.getFirstExists(false);
-        if(i == gui.equation.answer - 1)
+        if(i == gui.equation.answer)
             i++;
         if (stone)
         {

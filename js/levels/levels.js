@@ -85,6 +85,10 @@ game.time.advancedTiming = true;
                     game.physics.arcade.overlap(player, boss, this.bossHitPlayer, null, this);
                 }
 
+                platforms.update();
+                for(var i=0; i<10; i++){
+                    game.physics.arcade.collide(player, platforms.array[i], this.playerHitPlatform, null, this);
+                }
 
                 if( keyboard.enterKey() )
                     gui.pauseGame();
@@ -103,10 +107,7 @@ game.time.advancedTiming = true;
             }
         }
 
-        platforms.update();
-        for(var i=0; i<10; i++){
-            game.physics.arcade.collide(player, platforms.array[i], this.playerHitPlatform, null, this);
-        }
+        
 
 
        
