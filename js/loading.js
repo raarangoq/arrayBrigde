@@ -16,7 +16,7 @@ loading = {
     
 
     game.load.image('enemyBar', 'assets/pics/enemys/enemyBar.png');
-    game.load.image('stone', 'assets/pics/enemys/stone.png');
+    game.load.spritesheet('stone', 'assets/pics/enemys/stone.png', 50, 143);
     game.load.image('avalanche', 'assets/pics/enemys/avalanche.png');
     game.load.image('bat', 'assets/pics/enemys/segment.png');
     game.load.image('boss', 'assets/pics/enemys/boss.png');
@@ -28,14 +28,13 @@ loading = {
     game.load.image('spiral','assets/pics/espiral.png');
   
     game.load.image('background', 'assets/pics/background.png');
-    game.load.image('ground', 'assets/pics/levels/ground.png');
     game.load.image('lateralwall', 'assets/pics/levels/lateralwall.png');
     game.load.image('door', 'assets/pics/levels/door.png');
+    game.load.image('bridge', 'assets/pics/levels/bridge.png');
     game.load.image('platform', 'assets/pics/levels/platform.png');
-    game.load.image('pillar', 'assets/pics/levels/pillar.png');
+    
 
-    game.load.spritesheet('fire', 'assets/pics/levels/fire.png', 32, 32);
-    game.load.spritesheet('pedestal', 'assets/pics/levels/pedestal.png');
+    game.load.spritesheet('fire', 'assets/pics/levels/fire.png', 54, 81);
 
     game.load.image('end', 'assets/pics/images/end.png');
     game.load.image('initmenu', 'assets/pics/images/initmenu.png');

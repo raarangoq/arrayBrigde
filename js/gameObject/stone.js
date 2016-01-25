@@ -1,16 +1,24 @@
 
 var stone;
 
+function createStone(){
+    var stone = game.add.sprite(0, 0, 'stone');
+    game.physics.enable(stone, Phaser.Physics.ARCADE);
+    stone.anchor.setTo(0.5, 0.5);
+    stone.outOfBoundsKill = true;
+    stone.checkWorldBounds = true;
+
+    stone.animations.add('fly', [0, 1, 2, 3, 4, 5, 6, 7, 8], 8, true);
+    stone.play('fly');
+
+    return stone;
+}
+
 function addStones(){
 	stones = game.add.group();
-    stones.enableBody = true;
-    stones.physicsBodyType = Phaser.Physics.ARCADE;
-    stones.createMultiple(9, 'stone');
-    stones.setAll('anchor.x', 0.5);
-    stones.setAll('anchor.y', 0.5);
-    stones.setAll('outOfBoundsKill', true);
-    stones.setAll('checkWorldBounds', true);
 
+    for(var i=0; i<9; i++)
+        stones.add(createStone());
 
     stones.damage = 25;
     stones.speed = 300;

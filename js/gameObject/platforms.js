@@ -8,10 +8,10 @@ function addPlatforms(){
 //	platforms.timeToUpFires = game.time.now; 
 
 	for(var i=0; i<10; i++){
-		platforms.array[i] = game.add.sprite(30 + i * 70, 300, 'platform');
+		platforms.array[i] = game.add.sprite(140 + i * 53, 300, 'platform');
 		game.physics.enable(platforms.array[i], Phaser.Physics.ARCADE);
 		platforms.array[i].body.immovable = true;
-		platforms.array[i].text = platforms.array[i].addChild( game.add.text(30, 10, i, 
+		platforms.array[i].text = platforms.array[i].addChild( game.add.text(20, 5, i, 
     		{ font: '14px ferney', fill: '#fff', stroke: '#000000', strokeThickness: 3 }) );
 
 		platforms.array[i].fire = platforms.array[i].addChild(addFire());
@@ -32,8 +32,9 @@ function addPlatforms(){
 }
 
 function addFire () {
-	var fire = game.add.sprite(0, 0, 'fire');
-	fire.animations.add('fire', [0, 1], 8, true);
+	var fire = game.add.sprite(0, -70, 'fire');
+//	fire.anchor.setTo(0.5, 0.8);
+	fire.animations.add('fire', [0, 1, 2], 8, true);
 	fire.play('fire');
 
 	return fire;

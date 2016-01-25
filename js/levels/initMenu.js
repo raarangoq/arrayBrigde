@@ -7,6 +7,7 @@ var flags = [];
 
 var walls;
 var platforms = [];
+var bridge;
 var door;
 var stones;
 var bats;
@@ -48,6 +49,9 @@ initMenu = {
 
 	    this.addWalls();
 	    walls.callAll('kill');
+
+	    bridge = game.add.sprite(0, 270, 'bridge');
+	    bridge.kill();
 
 	   	addPlatforms();
 	   	platforms.setAlive(false);
@@ -125,17 +129,14 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
 		walls = game.add.group();
 		walls.enableBody = true;
 
-//		var wall = walls.create(0, 450, 'ground');
-//		wall.body.immovable = true;
-//		wall.body.setSize(800, 30, 0, 50);
-
-		wall = walls.create(0, -50, 'lateralwall');
+		wall = walls.create(80, -50, 'lateralwall');
 		wall.body.immovable = true;
+		wall.renderable = false;
 
-		wall = walls.create(750, -50, 'lateralwall');
+		wall = walls.create(670, -50, 'lateralwall');
 		wall.body.immovable = true;
+		wall.renderable = false;
 
-		
 	},
 
 	addPlatforms: function(){

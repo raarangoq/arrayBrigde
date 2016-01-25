@@ -4,9 +4,7 @@ function addPlayer(){
 	// El objeto player en si mismo es un objeto sprite
 	player = game.add.sprite(400, 200, 'player');
 	game.physics.enable(player, Phaser.Physics.ARCADE);
-	player.body.collideWorldBounds = true;
-	player.scale.setTo(1.3, 1.3);
-	player.body.setSize(30, 34, 19 + 9, 17 + 5);   // Reajustar el collider del jugador, para que solo cubra el cuerpo
+	player.body.setSize(30, 34, 19, 17);   // Reajustar el collider del jugador, para que solo cubra el cuerpo
 	player.body.gravity.y = 200;
 
 	player.inGround = false;
@@ -23,9 +21,6 @@ function addPlayer(){
 	player.shield = player.addChild(game.add.sprite(17, 10, 'shield'));
 	player.shield.visible = false;
 
-	player.eyes = game.add.sprite( this.x+17, this.y+10, 'shield');
-	player.eyes.visible = false;
-
 	player.haveTorpedo = false;
 	player.timeWithVelocity = 5000;
     player.timeVelocityActivated = game.time.time - 5000;
@@ -39,7 +34,6 @@ function addPlayer(){
 	player.speed = 200;
 	player.highSpeed = 300;
 	player.flySpeed = 20;
-	player.timeOfTouchWall = game.time.now;
 	player.timeToDownPlatform = game.time.now;
 	player.health = game.global.health;
 	player.hitDamage = 10;
@@ -55,7 +49,6 @@ function addPlayer(){
 	player.attacking = attacking;
 	player.hitPlayer = hitPlayer;
 	player.movePlayer = movePlayer;
-	player.setVelocity = setPlayerVelocity;
 	player.playAnimations = playAnimations;
 	player.toAttack = toAttack;
 	player.update = updatePlayer;
@@ -177,7 +170,6 @@ function playerDies(stone){
         // When the player dies
 	if (game.global.lives < 1 || stone){
 		game.global.lives = 0;
-	    this.eyes.visible = false;
 	    this.kill();
 
 	    loseImage.visible = true;
@@ -189,36 +181,19 @@ function playerSetDrawOrder(){
 	inkImage.bringToTop();
 }
 
-function setPlayerVelocity(direction, jumpInWall){
-//	if(player.body.touching.down || jumpInWall){
-		this.body.velocity.x = direction * this.speed;
-//	}
-
-}
 
 // El movimiento del jugador mediante teclado
 function movePlayer(){
 	if(!this.canMove || game.physics.arcade.isPaused || flags['winState'])
 		return;
 
-//	if(player.body.touching.down)
-		this.body.velocity.x = 0;
-//	else{
-		if(player.body.touching.right)
-			this.timeOfTouchRightWall = game.time.now;
-		if(player.body.touching.left)
-			this.timeOfTouchLeftWall = game.time.now;
-//	}
+	this.body.velocity.x = 0;
+
 
 	// Al presionar una tecla, el jugador se mueve y se activa una animacion
 	if(keyboard.leftKey()){
 		// Mover a la izquierda
-		if(game.time.now - this.timeOfTouchRightWall < 500){
-			this.body.velocity.y = -this.speed;
-			this.setVelocity(-1, true);
-		}
-		else
-			this.setVelocity(-1, false);
+		this.body.velocity.x = - this.speed;
 
 		this.playAnimations('left');
 		if(!this.is_attacking) 
@@ -226,12 +201,7 @@ function movePlayer(){
 	}
 	else if(keyboard.rightKey()){
 		// Mover a la derecha
-		if(game.time.now - this.timeOfTouchLeftWall < 500){
-			this.body.velocity.y = -this.speed;
-			this.setVelocity(1, true);
-		}
-		else
-			this.setVelocity(1, false);
+		this.body.velocity.x = this.speed;
 		
 		this.playAnimations("right");
 		if(!this.is_attacking) 
@@ -293,11 +263,10 @@ function updatePlayer(){
 		this.spiral.visible = false;
 	}
 
-	if(this.y < 0)
-		this.y = 0;
-
-	this.eyes.x = this.x+17;
-	this.eyes.y = this.y+10;
+	if(this.y <= 0){
+		this.y = 10;
+		this.body.velocity.y = 0;
+	}
 
 	this.movePlayer();
 	this.attacking();
@@ -368,5 +337,4 @@ function restartPlayer(){
 	this.y = 200;
 	this.segment = null;
 	this.shield.visible = false;
-	this.eyes.revive();
 }

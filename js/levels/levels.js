@@ -20,6 +20,7 @@ endImage.visible = false;
 
 
     walls.callAll('revive');
+    bridge.revive();
 
     
 
@@ -61,10 +62,12 @@ game.time.advancedTiming = true;
         gui.update();
 
 
-        this.playerTouchWalls();
+        
             
 
         if (!flags['winState']){
+            this.playerTouchWalls();
+            
             if (player.alive){
                 
                 game.physics.arcade.overlap(player, stones, this.playerHitStone, null, this);
@@ -86,9 +89,7 @@ game.time.advancedTiming = true;
                 }
 
                 platforms.update();
-                for(var i=0; i<10; i++){
-                    game.physics.arcade.collide(player, platforms.array[i], this.playerHitPlatform, null, this);
-                }
+                
 
                 if( keyboard.enterKey() )
                     gui.pauseGame();
@@ -108,7 +109,9 @@ game.time.advancedTiming = true;
         }
 
         
-
+        for(var i=0; i<10; i++){
+            game.physics.arcade.collide(player, platforms.array[i], this.playerHitPlatform, null, this);
+        }
 
        
     },
