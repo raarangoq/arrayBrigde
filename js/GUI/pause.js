@@ -39,7 +39,6 @@ function pauseMenuUpdate(){
 	}
 }
 
-
 function showPausePage(page){
 	if(page < 0)
 		page = this.pages.length - 1;

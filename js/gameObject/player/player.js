@@ -4,7 +4,7 @@ function addPlayer(){
 	// El objeto player en si mismo es un objeto sprite
 	player = game.add.sprite(400, 200, 'player');
 	game.physics.enable(player, Phaser.Physics.ARCADE);
-	player.body.setSize(30, 34, 19, 17);   // Reajustar el collider del jugador, para que solo cubra el cuerpo
+	player.body.setSize(21, 26, 23, 23);   // Reajustar el collider del jugador, para que solo cubra el cuerpo
 	player.body.gravity.y = 200;
 
 	player.inGround = false;

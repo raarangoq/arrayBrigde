@@ -239,7 +239,7 @@ game.time.advancedTiming = true;
 textb.text = game.time.fps;
 
 text.text = boss.beaten;
-
+game.debug.body(stones.children[0]);
 
     },
 

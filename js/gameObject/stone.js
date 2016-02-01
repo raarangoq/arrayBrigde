@@ -5,6 +5,7 @@ function createStone(){
     var stone = game.add.sprite(0, 0, 'stone');
     game.physics.enable(stone, Phaser.Physics.ARCADE);
     stone.anchor.setTo(0.5, 0.5);
+    stone.body.setSize(28, 23, 0, 56);
     stone.outOfBoundsKill = true;
     stone.checkWorldBounds = true;
 
