@@ -19,6 +19,7 @@ function addPlayer(){
 	player.spiral = player.addChild(addSpiral());
 
 	player.shield = player.addChild(game.add.sprite(17, 10, 'shield'));
+	player.shield.initTime = game.time.now;
 	player.shield.visible = false;
 
 	player.haveTorpedo = false;
@@ -116,7 +117,7 @@ function hitPlayer(enemy){
 	}
 	player.timeOfLastHit = game.time.now;
 
-	if(this.canMove){
+	if(this.canMove && !this.shield.visible){
 		if(enemy.key == 'platform'){
 			this.takeDamage(enemy.damage);
 		}
@@ -129,6 +130,7 @@ function hitPlayer(enemy){
 				this.takeDamage(enemy.damage);
 
 			this.shield.visible = false;
+			this.shield.scale.setTo(1, 1);
 
 			this.canMove = false;
 			this.spiral.visible = true;
@@ -138,10 +140,8 @@ function hitPlayer(enemy){
 
 	        player.body.velocity.x = xDirection * 200;
 		}
+		this.sound_hit.play();
 	}
-		
-	
-	this.sound_hit.play();
 }
 
 function playerTakeDamage(damage){
@@ -282,6 +282,18 @@ function updatePlayer(){
         gui.changeAbility(false, "velocity");
     }  
 
+    if(this.shield.visible){
+    	var time =  Math.floor((20000 - (game.time.now - this.shield.initTime)) / 1000);
+    	var scale = ((time * 1000 / 20000) * 1.5) + 0.5;
+    	if(scale > 1)
+    		scale = 1;
+    	
+    	this.shield.scale.setTo(scale, scale);
+
+    	if(game.time.now - this.shield.initTime > 20000)
+    		this.shield.visible = false;
+    }
+
     if( this.segment ){
     	this.segment.x = this.body.x + 5;
 		this.segment.y = this.body.y - 45;
@@ -315,6 +327,7 @@ function activateVelocity(){
 
 function activateShield(){
 	this.shield.visible = true;
+	this.shield.initTime = game.time.now;
 }
 
 function activateLight(){

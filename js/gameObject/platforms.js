@@ -11,12 +11,13 @@ function addPlatforms(){
 		platforms.array[i] = game.add.sprite(140 + i * 53, 300, 'platform');
 		game.physics.enable(platforms.array[i], Phaser.Physics.ARCADE);
 		platforms.array[i].body.immovable = true;
-		platforms.array[i].text = platforms.array[i].addChild( game.add.text(20, 5, i, 
-    		{ font: '14px ferney', fill: '#fff', stroke: '#000000', strokeThickness: 3 }) );
 
 		platforms.array[i].fire = platforms.array[i].addChild(addFire());
 		platforms.array[i].fire.visible = false;
 
+		platforms.array[i].text = platforms.array[i].addChild( game.add.text(20, 5, i, 
+    		{ font: '14px ferney', fill: '#fff', stroke: '#000000', strokeThickness: 3 }) );
+9
 		platforms.array[i].damage = 30;
 	}
 
@@ -31,8 +32,8 @@ function addPlatforms(){
 
 }
 
-function addFire () {
-	var fire = game.add.sprite(0, -70, 'fire');
+function addFire() {
+	var fire = game.add.sprite(0, -50, 'fire');
 //	fire.anchor.setTo(0.5, 0.8);
 	fire.animations.add('fire', [0, 1, 2], 8, true);
 	fire.play('fire');

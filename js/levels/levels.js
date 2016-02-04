@@ -35,7 +35,7 @@ endImage.visible = false;
     door.setAlive(true);
     door.reset();
 
-//    items = addItem('light');
+    items = addItem('shield');
 
     platforms.setAlive(true);
     platforms.setPlatforms();
@@ -66,7 +66,7 @@ game.time.advancedTiming = true;
             
 
         if (!flags['winState']){
-            this.playerTouchWalls();
+            game.physics.arcade.collide(player, walls);
             
             if (player.alive){
                 
@@ -111,16 +111,19 @@ game.time.advancedTiming = true;
         
         for(var i=0; i<10; i++){
             game.physics.arcade.collide(player, platforms.array[i], this.playerHitPlatform, null, this);
+            game.physics.arcade.collide(stones, platforms.array[i], this.stoneHitPlatform, null, this);
         }
 
        
     },
 
+    stoneHitPlatform: function(platform, stone){
+        var explosion = crashStones.getFirstExists(false);
+        explosion.reset(platform.x + 30, platform.y );
+        explosion.play('kaboom', 30, false, true);
+        boom_sound.play();
 
-
-    playerTouchWalls: function(){
-        game.physics.arcade.collide(player, walls);
-        
+        stone.kill();
     },
 
     playerHitBat: function(player, bat){
@@ -239,7 +242,7 @@ game.time.advancedTiming = true;
 textb.text = game.time.fps;
 
 text.text = boss.beaten;
-game.debug.body(stones.children[0]);
+game.debug.body(walls.children[0]);
 
     },
 

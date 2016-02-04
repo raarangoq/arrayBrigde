@@ -18,10 +18,11 @@ loading = {
     game.load.image('enemyBar', 'assets/pics/enemys/enemyBar.png');
     game.load.spritesheet('stone', 'assets/pics/enemys/stone.png', 50, 143);
     game.load.image('avalanche', 'assets/pics/enemys/avalanche.png');
-    game.load.image('bat', 'assets/pics/enemys/segment.png');
-    game.load.image('boss', 'assets/pics/enemys/boss.png');
+    game.load.spritesheet('bat', 'assets/pics/enemys/bat.png', 67, 91);
+    game.load.spritesheet('boss', 'assets/pics/enemys/boss.png', 174, 106);
 
     game.load.spritesheet('kaboom', 'assets/pics/explode.png', 128, 128);
+    game.load.spritesheet('boomStone', 'assets/pics/boomStone.png', 172, 144);
 
     game.load.spritesheet('player', 'assets/pics/player.png', 70, 70);
     game.load.spritesheet('attack','assets/pics/attackzone.png', 30, 30);
@@ -29,6 +30,7 @@ loading = {
   
     game.load.image('background', 'assets/pics/background.png');
     game.load.image('lateralwall', 'assets/pics/levels/lateralwall.png');
+    game.load.image('wall', 'assets/pics/levels/wall.png');
     game.load.image('door', 'assets/pics/levels/door.png');
     game.load.image('bridge', 'assets/pics/levels/bridge.png');
     game.load.image('platform', 'assets/pics/levels/platform.png');

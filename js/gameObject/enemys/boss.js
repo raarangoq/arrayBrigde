@@ -3,11 +3,13 @@
 function addBoss(){
 	boss = game.add.sprite(50, 200, 'boss');
 	game.physics.enable(boss, Phaser.Physics.ARCADE);
+    boss.body.setSize( 56, 59, 59, 22);
+    boss.animations.add('fly', [0, 1, 2, 3, 4, 5], 8, true);
+    boss.play('fly');
 
-	boss.scale.setTo(0.4, 0.4);
 	boss.speed = 300;
 	boss.pointA = 50;
-    boss.pointB = 700;
+    boss.pointB = 600;
     boss.yPoint = 100;
 
     boss.xTarget = player.body.x;
@@ -36,6 +38,7 @@ function addBoss(){
     boss.update = updateBoss;
     boss.reset = resetBoss;
     boss.takeDamage = bossTakeDamage;
+    boss.goBack = bossGoBack;
 
     game.physics.arcade.moveToXY(boss, boss.target, boss.y, boss.speed);
 }
@@ -88,6 +91,8 @@ function bossTakeDamage(damage){
 
     this.healthBar.width = 190 * ( this.health / this.maxHealth);
 
+    this.goBack();
+
     if(this.health <= 0){
 //        this.healthBar.visible = false;
 
@@ -95,6 +100,21 @@ function bossTakeDamage(damage){
 //        this.killSound.play();
     }
 
+}
+
+function bossGoBack(){
+    this.yTarget = this.yPoint;
+    // If this moves to the player...
+    if(this.target == 'pointB'){
+        this.target = 'pointA';
+        this.xTarget = this.pointA;
+        game.physics.arcade.moveToXY(this, this.xTarget, this.yTarget, this.speed);
+    }
+    else{
+        this.target = 'pointB';
+        this.xTarget = this.pointB;
+        game.physics.arcade.moveToXY(this, this.xTarget, this.yTarget, this.speed);
+    }
 }
 
 function stopBossMove(){

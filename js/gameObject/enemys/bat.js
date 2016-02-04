@@ -9,7 +9,7 @@ function addBats(){
 	bats = game.add.group();
     bats.enableBody = true;
     bats.physicsBodyType = Phaser.Physics.ARCADE;
-    bats.createMultiple(30, 'bat');
+    bats.createMultiple(3, 'bat');
     bats.setAll('anchor.x', 0.5);
     bats.setAll('anchor.y', 0.5);
     bats.setAll('outOfBoundsKill', true);
@@ -19,7 +19,6 @@ function addBats(){
     bats.timeOfLastBat = game.time.now + 2000;
     bats.timeBetweenBats = 5000;
 
-    bats.forEach(this.setBat, this);
     bats.damage = 20;
     bats.speed = 300;
 
@@ -33,6 +32,17 @@ function addBats(){
     bats.updateBat = updateBat;
     bats.setBat = setBat;
     bats.reset = resetBats;
+    bats.addAnimations = addBatsAnimations;
+
+    bats.forEach(bats.setBat, bats);
+    bats.forEach(bats.addAnimations, bats);
+}
+
+function addBatsAnimations(bat){
+    bat.animations.add('fly', [0, 1, 2, 3, 4, 5, 6, 7], 15, true);
+    bat.play('fly');
+
+    bat.body.setSize(13, 19, 0, 19);
 }
 
 function resetBats(){

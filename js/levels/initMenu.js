@@ -10,6 +10,7 @@ var platforms = [];
 var bridge;
 var door;
 var stones;
+var crashStones;
 var bats;
 var boss;
 
@@ -47,8 +48,7 @@ initMenu = {
 		background.kill();
 	    //game.stage.backgroundColor = '#aaaaaa';
 
-	    this.addWalls();
-	    walls.callAll('kill');
+	    
 
 	    bridge = game.add.sprite(0, 270, 'bridge');
 	    bridge.kill();
@@ -56,6 +56,9 @@ initMenu = {
 	   	addPlatforms();
 	   	platforms.setAlive(false);
 	  
+	   	this.addWalls();
+	    walls.callAll('kill');
+
 	    addPlayer();
 	    player.kill();
 
@@ -64,6 +67,10 @@ initMenu = {
 
 	    addStones();
 	    stones.callAll('kill');
+
+	    crashStones = game.add.group();
+	    crashStones.createMultiple(9, 'boomStone');
+	    crashStones.forEach(this.setupExplosion, this);
 
 	    addBats();
 	    bats.callAll('kill');
@@ -129,13 +136,13 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
 		walls = game.add.group();
 		walls.enableBody = true;
 
-		wall = walls.create(80, -50, 'lateralwall');
+		wall = walls.create(75, 200, 'wall');
 		wall.body.immovable = true;
-		wall.renderable = false;
+		wall.body.setSize(60, 320, 0, -200);
 
-		wall = walls.create(670, -50, 'lateralwall');
+		wall = walls.create(665, 200, 'wall');
 		wall.body.immovable = true;
-		wall.renderable = false;
+		wall.body.setSize(60, 320, 0, -200);
 
 	},
 
@@ -147,7 +154,7 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
     setupExplosion: function(explosion) {
         explosion.anchor.x = 0.5;
         explosion.anchor.y = 0.5;
-        explosion.animations.add('kaboom', null, 10);
+        explosion.animations.add('kaboom', null, 5);
     },
 
 	update: function(){
