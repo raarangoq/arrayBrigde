@@ -340,8 +340,6 @@ function setWinState(){
 	flags['winState'] = true;
 	timeOfWinState = game.time.now;
 
-	door.move();
-
 	bats.callAll('kill');
 }
 

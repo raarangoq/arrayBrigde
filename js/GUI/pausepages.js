@@ -32,31 +32,33 @@ function addPausePage1(){
 }
 
 function addPausePage2(){
-	var page = game.add.sprite(100, 130, 'bat');
-	var text = game.add.text(50, 0, 
+	var page = game.add.sprite(100, 100, 'bat');
+	page.animations.add('fly', [0, 1, 2, 3, 4, 5, 6, 7], 15, true);
+    page.play('fly');
+	var text = game.add.text(100, 30, 
 		'Murcielago: pequeño bicho volador que inflinge daño leve, pero te incapacita con su golpe.', 
 		{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
-		wordWrap: true, wordWrapWidth: 600});
+		wordWrap: true, wordWrapWidth: 500});
 	page.addChild(text);
 
-	var image = game.add.sprite(0, 50, 'stone');
+	var image = game.add.sprite(0, 100, 'stone');
 	image.animations.add('fly', [0, 1, 2, 3, 4, 5, 6, 7, 8], 8, true);
     image.play('fly');
 	page.addChild(image);
-	text = game.add.text(50, 100, 
+	text = game.add.text(80, 150, 
 		'Roca: Una roca de lava que cae del cielo, te matará con solo tocarte.', 
 		{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3, 
-		wordWrap: true, wordWrapWidth: 600});
+		wordWrap: true, wordWrapWidth: 500});
 	page.addChild(text);
 
-	image = game.add.sprite(0, 200, 'fire');
+	image = game.add.sprite(0, 250, 'fire');
 	image.animations.add('burn', [0, 1, 2], 8, true);
     image.play('burn');
 	page.addChild(image);
-	text = game.add.text(50, 230, 
+	text = game.add.text(80, 280, 
 		'Fuego: Infringe daño leve.', 
 		{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
-		wordWrap: true, wordWrapWidth: 600});
+		wordWrap: true, wordWrapWidth: 500});
 	page.addChild(text);
 
 	page.setAlive = setPageAlive;

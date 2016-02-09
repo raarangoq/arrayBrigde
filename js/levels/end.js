@@ -40,6 +40,13 @@ end = {
 
 
     time = game.time.now;
+
+    ScormProcessSetValue("cmi.core.score.raw", "100");
+    ScormProcessSetValue("cmi.core.score.min", "0");
+    ScormProcessSetValue("cmi.core.score.max", "100");
+    ScormProcessSetValue("cmi.core.lesson_status", "passed");
+    ScormProcessSetValue("cmi.comments", gui.scoreText.score);
+
     },
 
     update: function(){

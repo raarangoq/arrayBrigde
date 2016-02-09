@@ -19,7 +19,11 @@ endImage.visible = false;
     gui.setAlive(true);
 
 
-    walls.callAll('revive');
+    walls[0].setAlive(true);
+    walls[0].restartPosition();
+    walls[1].setAlive(true);
+    walls[1].restartPosition();
+
     bridge.revive();
 
     
@@ -31,9 +35,6 @@ endImage.visible = false;
         boss.revive();
         boss.reset();
     }
-
-    door.setAlive(true);
-    door.reset();
 
     items = addItem('shield');
 
@@ -66,15 +67,13 @@ game.time.advancedTiming = true;
             
 
         if (!flags['winState']){
-            game.physics.arcade.collide(player, walls);
+            game.physics.arcade.collide(player, walls[0]);
+            game.physics.arcade.collide(player, walls[1]);
             
             if (player.alive){
                 
                 game.physics.arcade.overlap(player, stones, this.playerHitStone, null, this);
                 game.physics.arcade.overlap(player, bats, this.playerHitBat, null, this);
-
-                if(door.visible)
-                    game.physics.arcade.collide(player, door);
 
                 game.physics.arcade.overlap(player, items, this.setAbility, null, this);
 
@@ -108,6 +107,7 @@ game.time.advancedTiming = true;
             }
         }
 
+        game.physics.arcade.collide(player, bridge);
         
         for(var i=0; i<10; i++){
             game.physics.arcade.collide(player, platforms.array[i], this.playerHitPlatform, null, this);
@@ -131,7 +131,7 @@ game.time.advancedTiming = true;
     },
 
     playerHitPlatform: function(player, platform){
-        if(platform.fire.visible){
+        if(platform.fire.visible && !flags['winState']){
             player.hitPlayer(platform);
         }
     },
@@ -194,7 +194,6 @@ game.time.advancedTiming = true;
                     player.body.velocity.x = 0;
                     player.animations.stop();
                     flags['winAnimationPointA'] = true;
-                    this.addExplosion(door.x, door.y);
                 }
             }
             else if(game.time.now - timeOfWinState < 6000){
@@ -203,6 +202,14 @@ game.time.advancedTiming = true;
                     player.playAnimations("right");
                     player.body.collideWorldBounds = false;
                     flags['winAnimationPointB'] = true;
+                    walls[1].setAlive(false);
+                    this.addExplosion(walls[1].x, walls[1].y);
+                    this.addExplosion(walls[1].x + 40, walls[1].y + 80);
+
+                    if(game.global.level == 5){
+                        boss.kill();
+                        this.addExplosion(boss.x, boss.y);
+                    }
                 }
             }
             else if(game.time.now - timeOfWinState < 8000){
@@ -242,7 +249,7 @@ game.time.advancedTiming = true;
 textb.text = game.time.fps;
 
 text.text = boss.beaten;
-game.debug.body(walls.children[0]);
+//game.debug.body(bridge);
 
     },
 
@@ -258,15 +265,14 @@ game.debug.body(walls.children[0]);
             game.global.health = 100;
         }
 
-        door.setAlive(false);
         boss.kill();
+        walls[0].setAlive(false);
 
         if(items)
             items.destroy();
         items = null;
 
         stones.reset();
-        boss.kill();
         
         winImage.visible = false;
         endImage.visible = false;
@@ -280,7 +286,6 @@ game.debug.body(walls.children[0]);
             game.state.start('levels', false);
         else {
             player.kill();
-            player.eyes.kill();
             platforms.setAlive(false);
             game.state.start('end', false);
         }
@@ -300,8 +305,4 @@ game.debug.body(walls.children[0]);
         flags['playedE'] = false;
         flags['playedF'] = false;
     },
-
-
-
-
 }

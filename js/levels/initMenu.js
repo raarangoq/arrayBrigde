@@ -5,7 +5,7 @@ var player;
 
 var flags = [];
 
-var walls;
+var walls = [];
 var platforms = [];
 var bridge;
 var door;
@@ -51,19 +51,21 @@ initMenu = {
 	    
 
 	    bridge = game.add.sprite(0, 270, 'bridge');
+	    game.physics.enable(bridge, Phaser.Physics.ARCADE);
+	    bridge.body.setSize(800, 320, 0, 30);
+		bridge.body.immovable = true;
 	    bridge.kill();
 
 	   	addPlatforms();
 	   	platforms.setAlive(false);
 	  
-	   	this.addWalls();
-	    walls.callAll('kill');
+	   	walls[0] = addWall(75);
+	   	walls[1] = addWall(665);
+	    walls[0].setAlive(false);
+	    walls[1].setAlive(false);
 
 	    addPlayer();
 	    player.kill();
-
-	    door = addDoor();
-	    door.setAlive(false);
 
 	    addStones();
 	    stones.callAll('kill');
@@ -129,20 +131,6 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
         flags['playedD'] = false;
         flags['playedE'] = false;
         flags['playedF'] = false;
-
-	},
-
-	addWalls: function(){
-		walls = game.add.group();
-		walls.enableBody = true;
-
-		wall = walls.create(75, 200, 'wall');
-		wall.body.immovable = true;
-		wall.body.setSize(60, 320, 0, -200);
-
-		wall = walls.create(665, 200, 'wall');
-		wall.body.immovable = true;
-		wall.body.setSize(60, 320, 0, -200);
 
 	},
 

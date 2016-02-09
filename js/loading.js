@@ -29,7 +29,6 @@ loading = {
     game.load.image('spiral','assets/pics/espiral.png');
   
     game.load.image('background', 'assets/pics/background.png');
-    game.load.image('lateralwall', 'assets/pics/levels/lateralwall.png');
     game.load.image('wall', 'assets/pics/levels/wall.png');
     game.load.image('door', 'assets/pics/levels/door.png');
     game.load.image('bridge', 'assets/pics/levels/bridge.png');
