@@ -40,7 +40,7 @@ initMenu = {
 
 		this.addFlags();
 		
-		sky = game.add.sprite(0, 0, 'sky');
+		sky = game.add.sprite(0, 0, 'video');
 		sky.kill();
 
 		// GameObjects ever in game
@@ -52,7 +52,7 @@ initMenu = {
 
 	    bridge = game.add.sprite(0, 270, 'bridge');
 	    game.physics.enable(bridge, Phaser.Physics.ARCADE);
-	    bridge.body.setSize(800, 320, 0, 30);
+	    bridge.body.setSize(800, 320, 0, 35);
 		bridge.body.immovable = true;
 	    bridge.kill();
 
@@ -98,6 +98,7 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
 	    boom_sound = game.add.audio('boom', 0.5);
 
 	    dialog = game.add.sprite(230, 300, 'dialog');
+	    dialog.scale.setTo(1.2, 1.2);
 	    dialog.kill();
 
 	    texta = game.add.text(dialog.x + dialog.width / 2, dialog.y + dialog.height / 2, '', 
@@ -106,15 +107,7 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
 	    texta.anchor.set(0.5);
 	    texta.kill();
 
-
-	    this.addMedusa();
-	    medusa.kill();
-	    medusa_sound = game.add.audio('medusa');
-
 	    this.addLink();
-
-
-	   
 
 	    gui = new GUI();
 	    gui.setAlive(false);	
@@ -149,17 +142,9 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
 		if(keyboard.enterKey()){
 			image.destroy();
 			
-			game.state.start('levels', false);
-			//game.state.start('introVideo', false);
+			//game.state.start('levels', false);
+			game.state.start('introVideo', false);
 		}
-	},
-
-	addMedusa: function(){
-		medusa = game.add.sprite(100, 350, 'medusa');
-		game.physics.enable(medusa, Phaser.Physics.ARCADE);
-		medusa.animations.add('normal', [0, 1, 2, 3, 4, 5], 6, true);
-		medusa.animations.add('attack', [6, 7, 8, 9], 6, false);
-		medusa.scale.setTo(2, 2);
 	},
 
 	addLink: function(){
@@ -178,9 +163,21 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
 
 	    winImage = game.add.sprite(0, 0, 'win');
 	    winImage.visible = false;
+
 	    loseImage = game.add.sprite(0, 0, 'lose');
 	    loseImage.visible = false;
+
 	    endImage = game.add.sprite(0, 0, 'end');
 	    endImage.visible = false;
+	    var text = game.add.text(400, 200, 'GANASTE!!!!\nHaz resuelto todas las ecuaciones, lástima que no logramas escapar a tiempo.',
+		{ font: "24pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
+			wordWrap: true, wordWrapWidth: 600, align: 'center'});
+		text.anchor.setTo(0.5, 0.5);
+		endImage.addChild(text);
+	    text = game.add.text(400, 500, 'Presiona ENTER para volver a jugar.',
+		{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
+			wordWrap: true, wordWrapWidth: 600, align: 'center'});
+		text.anchor.setTo(0.5, 0.5);
+		endImage.addChild(text);
 	},
 }

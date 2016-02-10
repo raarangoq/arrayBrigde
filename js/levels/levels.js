@@ -48,10 +48,8 @@ dialog.kill();
 
 game.time.advancedTiming = true;
 
-
-    
-
     game.global.is_playing = true;
+    game.global.timeInitLevel = game.time.now;
     gui.pauseGame();
 
     
@@ -62,8 +60,16 @@ game.time.advancedTiming = true;
     update: function() {
         gui.update();
 
+        if(!flags['winState'] || !game.global.level == 5)
+            game.physics.arcade.collide(player, bridge);
 
         
+
+        if(game.time.now - game.global.timeInitLevel < 3000){
+            if( keyboard.enterKey() )
+                gui.pauseGame();
+            return;
+        }
             
 
         if (!flags['winState']){
@@ -89,9 +95,9 @@ game.time.advancedTiming = true;
 
                 platforms.update();
                 
-
                 if( keyboard.enterKey() )
                     gui.pauseGame();
+                
             }
             else{
                 if( keyboard.enterKey() ){
@@ -102,19 +108,81 @@ game.time.advancedTiming = true;
         }
         else{
             this.playWinAnimation();
+            game.physics.arcade.overlap(boss, stones, this.stoneHitBoss, null, this);
             if( keyboard.enterKey() ){
                 this.restart();
             }
         }
 
-        game.physics.arcade.collide(player, bridge);
+        
         
         for(var i=0; i<10; i++){
             game.physics.arcade.collide(player, platforms.array[i], this.playerHitPlatform, null, this);
-            game.physics.arcade.collide(stones, platforms.array[i], this.stoneHitPlatform, null, this);
+            game.physics.arcade.overlap(stones, platforms.array[i], this.stoneHitPlatform, null, this);
         }
 
        
+    },
+
+    playWinAnimation: function(){
+        if (game.global.level < 5){          
+            if(game.time.now - timeOfWinState < 2000){ //wait
+                if(!flags['winAnimationPointA']){
+                    player.body.velocity.x = 0;
+                    player.animations.stop();
+                    flags['winAnimationPointA'] = true;
+                }
+            }
+            else if(game.time.now - timeOfWinState < 6000){
+                if(!flags['winAnimationPointB']){
+                    game.physics.arcade.moveToXY(player, 800, 300, 200);
+                    player.playAnimations("right");
+                    player.body.collideWorldBounds = false;
+                    flags['winAnimationPointB'] = true;
+                    walls[1].setAlive(false);
+                    this.addExplosion(walls[1].x, walls[1].y);
+                    this.addExplosion(walls[1].x + 40, walls[1].y + 80);
+
+                }
+            }
+            else if(game.time.now - timeOfWinState < 8000){
+                //wait..   
+            }
+            else{
+                winImage.visible = true;              
+            }
+        }
+        else{
+            if(game.time.now - timeOfWinState < 5000){
+                //wait..
+            }
+            else if(game.time.now - timeOfWinState < 6000){
+                if(!flags['winAnimationPointA']){
+                    flags['winAnimationPointA'] = true;
+                    stones.toBoss();
+                }
+            }
+            else if(game.time.now - timeOfWinState < 15000){
+                if(!flags['winAnimationPointB']){
+                    flags['winAnimationPointB'] = true;
+                    stones.toPlayerBeside();
+                   // platforms.down();
+                }
+            }
+            else{
+                endImage.visible = true;
+                gui.upScore(300);
+                gui.setAlive(false);
+            }
+        }
+    },
+
+    stoneHitBoss: function(boss, stone){
+        stone.kill();
+        boss.takeDamage(boss.health + 20);
+        this.addExplosion(boss.x, boss.y);
+        this.addExplosion(boss.x + 80, boss.y);
+        this.addExplosion(boss.x + 40, boss.y + 40);
     },
 
     stoneHitPlatform: function(platform, stone){
@@ -124,6 +192,11 @@ game.time.advancedTiming = true;
         boom_sound.play();
 
         stone.kill();
+
+        if(flags['winState'] && game.global.level == 5){
+            platforms.goDown();
+        }
+
     },
 
     playerHitBat: function(player, bat){
@@ -155,14 +228,6 @@ game.time.advancedTiming = true;
         boss.takeDamage(player.hitDamage);
     },
 
-    killBoss: function(boss, stone){
-        boss.killSound.play();
-        boss.kill();
-        this.addExplosion(boss.x, boss.y);
-        this.addExplosion(boss.x + 80, boss.y);
-        this.addExplosion(boss.x + 40, boss.y + 40);
-    },
-
     playerHitStone: function(player, stone){
         player.hitPlayer(stone);
         stone.kill();
@@ -187,45 +252,7 @@ game.time.advancedTiming = true;
     },
 
    
-    playWinAnimation: function(){
-        if (game.global.level <= 5){          
-            if(game.time.now - timeOfWinState < 2000){ //wait
-                if(!flags['winAnimationPointA']){
-                    player.body.velocity.x = 0;
-                    player.animations.stop();
-                    flags['winAnimationPointA'] = true;
-                }
-            }
-            else if(game.time.now - timeOfWinState < 6000){
-                if(!flags['winAnimationPointB']){
-                    game.physics.arcade.moveToXY(player, 800, 300, 200);
-                    player.playAnimations("right");
-                    player.body.collideWorldBounds = false;
-                    flags['winAnimationPointB'] = true;
-                    walls[1].setAlive(false);
-                    this.addExplosion(walls[1].x, walls[1].y);
-                    this.addExplosion(walls[1].x + 40, walls[1].y + 80);
 
-                    if(game.global.level == 5){
-                        boss.kill();
-                        this.addExplosion(boss.x, boss.y);
-                    }
-                }
-            }
-            else if(game.time.now - timeOfWinState < 8000){
-                
-                    
-                    
-                
-            }
-            else{
-                winImage.visible = true;              
-            }
-        }
-        else{
-//         
-        }
-    },
 
     // Establecer la explosión
     setupExplosion: function(explosion) {
@@ -248,9 +275,9 @@ game.time.advancedTiming = true;
 
 textb.text = game.time.fps;
 
-text.text = boss.beaten;
+text.text = platforms.array[0].y;
+//game.debug.body(platforms.array[0]);
 //game.debug.body(bridge);
-
     },
 
     restart: function() {
@@ -282,13 +309,11 @@ text.text = boss.beaten;
 
         this.restartFlags();
 
-        if(game.global.level <= 5)
-            game.state.start('levels', false);
-        else {
-            player.kill();
-            platforms.setAlive(false);
-            game.state.start('end', false);
-        }
+        if(game.global.level == 6)
+            game.global.level = 1;
+
+        game.state.start('levels', false);
+        
 
     },
 

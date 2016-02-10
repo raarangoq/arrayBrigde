@@ -8,7 +8,6 @@ var text;
 loading = {
 	preload: function(){
 
-    game.load.image('light', 'assets/pics/items/bombArrowItem.png');
     game.load.image('velocity', 'assets/pics/items/speedItem.png');
     game.load.image('shield', 'assets/pics/items/shield.png');
 
@@ -17,7 +16,6 @@ loading = {
 
     game.load.image('enemyBar', 'assets/pics/enemys/enemyBar.png');
     game.load.spritesheet('stone', 'assets/pics/enemys/stone.png', 50, 143);
-    game.load.image('avalanche', 'assets/pics/enemys/avalanche.png');
     game.load.spritesheet('bat', 'assets/pics/enemys/bat.png', 67, 91);
     game.load.spritesheet('boss', 'assets/pics/enemys/boss.png', 174, 106);
 
@@ -30,7 +28,6 @@ loading = {
   
     game.load.image('background', 'assets/pics/background.png');
     game.load.image('wall', 'assets/pics/levels/wall.png');
-    game.load.image('door', 'assets/pics/levels/door.png');
     game.load.image('bridge', 'assets/pics/levels/bridge.png');
     game.load.image('platform', 'assets/pics/levels/platform.png');
     
@@ -43,20 +40,16 @@ loading = {
     game.load.image('win', 'assets/pics/images/win.png');
     game.load.spritesheet('linkfail', 'assets/pics/videos/linkfail.png', 145, 175);
 
-    game.load.image('pause', 'assets/pics/images/pause.png');
     game.load.image('blankpause', 'assets/pics/images/blankpause.png');
     game.load.image('input', 'assets/pics/images/input.png');
 
     game.load.image('healthBar', 'assets/pics/GUI/healthbar.png');
 
 
-    game.load.image(        'sky',        'assets/pics/videos/sky.png');
+    game.load.image(        'video',        'assets/pics/videos/video.png');
     game.load.spritesheet(  'link',       'assets/pics/videos/link.png', 148, 150);
     game.load.spritesheet(  'linkfail',   'assets/pics/videos/linkfail.png', 145, 175);
-    game.load.image(        'cloud',      'assets/pics/videos/cloud.png');
     game.load.image(        'dialog',     'assets/pics/videos/dialog.png');
-
-    game.load.spritesheet('medusa', 'assets/pics/videos/medusa.png', 128, 128);
 
 /***********************************************************/
 //              Sounds

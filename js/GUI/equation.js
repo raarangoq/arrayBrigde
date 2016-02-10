@@ -2,7 +2,7 @@
 
 function addEquation(){
 	var equation = game.add.text(500, 50, '5', 
-		{ font: '34px ferney', fill: '#fff', align: "center" });
+		{ font: '34px ferney', fill: '#fff', align: "center", stroke: '#000000', strokeThickness: 3 });
 	equation.anchor.set(0.5);
 	equation.position.setTo(400, 50);
 

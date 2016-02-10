@@ -2,9 +2,6 @@
 
 var dialog;
 var link;
-var cloud1;
-var cloud2;
-var cloud3;
 
 var time;
 
@@ -13,19 +10,6 @@ var texta;
 intro_video = {
 	create: function(){
 		sky.revive();
-
-		cloud1 = game.add.sprite(300, 100, 'cloud');
-		cloud1.scale.setTo(0.3, 0.5);
-		game.physics.enable(cloud1, Phaser.Physics.ARCADE);
-		cloud1.body.velocity.x= 2;
-		cloud2 = game.add.sprite(-30, 130, 'cloud');
-		cloud2.scale.setTo(0.7, 0.3);
-		game.physics.enable(cloud2, Phaser.Physics.ARCADE);
-		cloud2.body.velocity.x= 3;
-		cloud3 = game.add.sprite(400, 50, 'cloud');
-		cloud3.scale.setTo(0.1, 0.1);
-		game.physics.enable(cloud3, Phaser.Physics.ARCADE);
-		cloud3.body.velocity.x= 3;
 
 		dialog.revive();
 		dialog.visible = false;
@@ -58,11 +42,11 @@ intro_video = {
 	setText: function(value){
 		if(value == 1){
 			dialog.visible = true;
-			texta.text = 'Rumores dicen que en estas cuevas se encuentran objetos de gran valor.';
+			texta.text = 'El volcán Vesubio ha entrado en erupción, la única salida son los puentes colgantes de Harimea.';
 		}
 		else if(value ==2){
 			dialog.position.setTo(230, 330);
-			texta.text = 'Entra en la cueva y busca esos objetos.';
+			texta.text = 'Debes resolver cada uno de los acertijos para poder avanzar, pero cuidado, te estarán acechando las criaturas que escapan del volcán.';
 		}
 
 		texta.position.setTo(dialog.x + dialog.width / 2 + 4, dialog.y + dialog.height / 2);
@@ -102,11 +86,6 @@ intro_video = {
 		link.kill();
 		texta.kill();
 
-
-		cloud1.destroy();
-		cloud2.destroy();
-		cloud3.destroy();
-		
 		game.state.start('levels', false);
 	}, 
 

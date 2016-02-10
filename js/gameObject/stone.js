@@ -1,6 +1,10 @@
 
 var stone;
 
+///////////////////////////////
+//////// a single stone
+///////////////////////////////
+
 function createStone(){
     var stone = game.add.sprite(0, 0, 'stone');
     game.physics.enable(stone, Phaser.Physics.ARCADE);
@@ -15,6 +19,10 @@ function createStone(){
     return stone;
 }
 
+///////////////////////////////////
+//// Group of stones
+///////////////////////////////////
+
 function addStones(){
 	stones = game.add.group();
 
@@ -27,21 +35,18 @@ function addStones(){
     stones.sound = game.add.audio("stone", 0.2);
 
     stones.dropStone = dropStone;
+    stones.dropSingleStone = dropSingleStone;
     stones.update = updateStone;
     stones.reset = resetStones;
+    stones.toBoss = stoneToBoss;
+    stones.toPlayerBeside = stoneToPlayerBeside;
 }
 
 function dropStone(){
     for(var i=0; i<10; i++){
-
-    	stone = this.getFirstExists(false);
         if(i == gui.equation.answer)
             i++;
-        if (stone)
-        {
-            stone.reset(platforms.array[i].x + platforms.array[i].width / 2, 0);
-            stone.body.velocity.y = this.speed;
-        }
+        this.dropSingleStone(platforms.array[i].x + platforms.array[i].width / 2);
     }
     this.sound.play();
 }
@@ -53,5 +58,23 @@ function updateStone(){
 
 function resetStones(){
     this.callAll('kill');
+}
+
+function stoneToBoss(){
+    this.dropSingleStone(boss.body.x + 50);
+}
+
+function stoneToPlayerBeside(){
+    this.dropSingleStone(player.body.x - 80);
+    this.dropSingleStone(player.body.x + 80);
+}
+
+function dropSingleStone(x){
+    stone = this.getFirstExists(false);
+    if (stone)
+    {
+        stone.reset(x, 0);
+        stone.body.velocity.y = this.speed;
+    }
 }
 

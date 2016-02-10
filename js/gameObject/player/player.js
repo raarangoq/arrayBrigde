@@ -29,6 +29,7 @@ function addPlayer(){
     player.timeOfLastHit = game.time.now;
     player.timeBetweenHits = 2000;
 
+    player.timeInitLevel = game.time.now;
 	player.canMove = true;
 	player.direction = "";
 	player.is_attacking = false;
@@ -258,6 +259,9 @@ function toAttack(){
 
 // Se ejecutan las funciones del jugador, como moverse y atacar
 function updatePlayer(){
+	if(game.physics.arcade.isPaused || game.time.now - game.global.timeInitLevel < 3000)
+        return;
+
 	if(game.time.now - this.start_time_hit > 1500 ){
 		this.canMove = true;
 		this.spiral.visible = false;
@@ -344,7 +348,10 @@ function setWinState(){
 }
 
 function restartPlayer(){
-	this.x = 200;
+	this.x = 00;
+	this.body.velocity.x = this.SPEED_WALKING;
+	this.timeInitLevel = game.time.now;
+	this.play('walk_right');
 	this.y = 200;
 	this.segment = null;
 	this.shield.visible = false;

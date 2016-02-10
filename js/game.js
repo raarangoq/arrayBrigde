@@ -2,8 +2,9 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
 
 game.global = {
-	level : 1,
+	level : 5,
 	is_playing : false,
+	timeInitLevel: 3000,
 	lives : 3,
 	health : 100
 }
@@ -19,5 +20,3 @@ game.state.add('introVideo', intro_video);
 
 game.state.add('levels', levels);
 
-
-game.state.add('end', end);

@@ -63,6 +63,10 @@ function pauseGame(){
 			game.physics.arcade.isPaused = false;
 			
 			gui.timeText.initLevelTime += (game.time.now - this.timeLastPause);
+			game.global.timeInitLevel += (game.time.now - this.timeLastPause);
+			player.shield.initTime += (game.time.now - this.timeLastPause);
+			boss.timeToNextMove += (game.time.now - this.timeLastPause);
+			bats.timeOfLastBat += (game.time.now - this.timeLastPause);
 		}
 		else{
 			this.visible = true;

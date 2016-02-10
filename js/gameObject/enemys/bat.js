@@ -66,7 +66,9 @@ function batGroupAttack(){
 }
 
 function updateBatsGroup(){
-	if( game.physics.arcade.isPaused || flags['winState'] || !game.global.is_playing)
+
+	if( game.physics.arcade.isPaused || flags['winState'] || 
+            !game.global.is_playing || game.time.now - game.global.timeInitLevel < 3000)
 		return;
 	
 	if( game.time.now - this.timeOfLastBat > 

@@ -55,7 +55,7 @@ function moveBossToTarget(){
 
 
 function updateBoss(){
-    if(game.physics.arcade.isPaused)
+    if(game.physics.arcade.isPaused || game.time.now - game.global.timeInitLevel < 3000)
         return;
 
     if( this.inMove && game.physics.arcade.distanceToXY(this, this.xTarget, this.yTarget) < 10 ){
@@ -64,20 +64,17 @@ function updateBoss(){
         }
         else{
             this.yTarget = this.yPoint;
-            // If this moves to the player...
             if(this.target == 'pointA'){
                 this.xTarget = this.pointA;
-                game.physics.arcade.moveToXY(this, this.xTarget, this.yTarget, this.speed);
             }
             else{
                 this.xTarget = this.pointB;
-                game.physics.arcade.moveToXY(this, this.xTarget, this.yTarget, this.speed);
             }
+            game.physics.arcade.moveToXY(this, this.xTarget, this.yTarget, this.speed);
         }
-        
     }
 
-    if(!this.inMove && game.time.now - this.timeOverMove > this.timeToNextMove){
+    if(!this.inMove && !flags['winState'] && game.time.now - this.timeOverMove > this.timeToNextMove){
         this.move();
     }
 }
@@ -94,10 +91,10 @@ function bossTakeDamage(damage){
     this.goBack();
 
     if(this.health <= 0){
-//        this.healthBar.visible = false;
+        this.healthBar.visible = false;
 
-//        this.kill();
-//        this.killSound.play();
+        this.kill();
+        this.killSound.play();
     }
 
 }
@@ -132,6 +129,7 @@ function stopBossMove(){
 function resetBoss(){ 
 	boss.y = this.pointA;
     boss.x = this.yPoint;
+    boss.body.velocity.setTo(0,0);
 
     boss.target = 'pointB';
     boss.beaten = false;
