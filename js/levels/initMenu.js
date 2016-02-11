@@ -86,14 +86,9 @@ initMenu = {
 	    explosions.createMultiple(15, 'kaboom');
 	    explosions.forEach(this.setupExplosion, this);
 
-text = game.add.text(20, 540, 'Cargando...', { fontSize: '16px', fill: '#ffffff'});
-textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff'});
+//text = game.add.text(20, 540, 'Cargando...', { fontSize: '16px', fill: '#ffffff'});
+//textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff'});
 
-
-//game.global.level = 5;
-
-//    this.addAliens();
-   
 	    sound_backgroud = game.add.audio('levelB', 0.5, true);
 	    boom_sound = game.add.audio('boom', 0.5);
 
@@ -126,11 +121,7 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
         flags['playedF'] = false;
 
 	},
-
-	addPlatforms: function(){
-		
-	},
-
+	
 	// Establecer la explosión
     setupExplosion: function(explosion) {
         explosion.anchor.x = 0.5;
@@ -169,7 +160,7 @@ textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff
 
 	    endImage = game.add.sprite(0, 0, 'end');
 	    endImage.visible = false;
-	    var text = game.add.text(400, 200, 'GANASTE!!!!\nHaz resuelto todas las ecuaciones, lástima que no logramas escapar a tiempo.',
+	    var text = game.add.text(400, 200, 'GANASTE!!!!\nHaz resuelto todas las ecuaciones, lástima que no lograras escapar a tiempo.',
 		{ font: "24pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
 			wordWrap: true, wordWrapWidth: 600, align: 'center'});
 		text.anchor.setTo(0.5, 0.5);

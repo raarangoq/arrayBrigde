@@ -100,3 +100,17 @@ function addPausePage3(){
 	page.setAlive = setPageAlive;
 	return page;
 }
+
+function addPausePage4(){
+	var page = game.add.sprite(60, 250, 'boss');
+	page.animations.add('fly', [0, 1, 2, 3, 4, 5], 8, true);
+	page.play('fly');
+	var text = game.add.text(200, -50, 
+		'Gran calavera: Enorme bestia que infringe daño moderado, muy rápido y elimina cualquier protección que tengas. \nPuedes golpearlo para desviar su ataque.', 
+		{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
+		wordWrap: true, wordWrapWidth: 450});
+	page.addChild(text);
+
+	page.setAlive = setPageAlive;
+	return page;
+}

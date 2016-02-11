@@ -18,9 +18,14 @@ function addPlayer(){
 	player.attack = player.addChild(addAttack());
 	player.spiral = player.addChild(addSpiral());
 
-	player.shield = player.addChild(game.add.sprite(17, 10, 'shield'));
+	player.shield = player.addChild(game.add.sprite(34, 30, 'aura'));
+	player.shield.anchor.setTo(0.5, 0.5);
+	player.shield.animations.add('shine', [0, 1, 2, 3, 4, 5, 6], 9, true);
+	player.shield.play('shine');
 	player.shield.initTime = game.time.now;
 	player.shield.visible = false;
+
+	player.blood = player.addChild(addBlood());
 
 	player.haveTorpedo = false;
 	player.timeWithVelocity = 5000;
@@ -58,7 +63,6 @@ function addPlayer(){
 	player.activateAbility = activateAbility;
 	player.activateVelocity = activateVelocity;
 	player.activateShield = activateShield;
-	player.activateLight = activateLight;
 
 	player.takeDamage = playerTakeDamage;
 	player.checkHealth = checkHealth;
@@ -118,15 +122,18 @@ function hitPlayer(enemy){
 	}
 	player.timeOfLastHit = game.time.now;
 
-	if(this.canMove && !this.shield.visible){
+	if(this.canMove){
 		if(enemy.key == 'platform'){
+			if(this.shield.visible) return;
 			this.takeDamage(enemy.damage);
 		}
 		else if(enemy.key == 'bat' || enemy.key == 'boss'){
 			this.start_time_hit = game.time.now;
 			
-			if(enemy.key == 'bat')
+			if(enemy.key == 'bat'){
+				if(this.shield.visible) return;
 				this.takeDamage(bats.damage);
+			}
 			else
 				this.takeDamage(enemy.damage);
 
@@ -146,6 +153,8 @@ function hitPlayer(enemy){
 }
 
 function playerTakeDamage(damage){
+
+	this.blood.playBleed();
 	game.global.health -= damage;
 	this.checkHealth();
 	this.playerDies();
@@ -262,6 +271,8 @@ function updatePlayer(){
 	if(game.physics.arcade.isPaused || game.time.now - game.global.timeInitLevel < 3000)
         return;
 
+    this.blood.update();
+
 	if(game.time.now - this.start_time_hit > 1500 ){
 		this.canMove = true;
 		this.spiral.visible = false;
@@ -304,7 +315,7 @@ function updatePlayer(){
     }
 
 	// Cuando se presiona la tecla SPACE, se produce un ataque
-	if(keyboard.spaceKey() && !this.is_attacking){
+	if(keyboard.spaceKey() && !this.is_attacking && !flags['winState']){
 		this.toAttack();
 	}
 
@@ -313,15 +324,12 @@ function updatePlayer(){
 
 
 function activateAbility(type){
-	gui.upScore(50);
+	gui.upScore(10);
     if ( type == "velocity"){
         this.activateVelocity();
     } 
     else if(type == 'shield'){
     	this.activateShield();
-    }
-    else if(type == 'light'){
-    	this.activateLight();
     }
 }
 
@@ -334,16 +342,13 @@ function activateShield(){
 	this.shield.initTime = game.time.now;
 }
 
-function activateLight(){
-	light.addTime(20000);
-}
-
-
 function setWinState(){
 
 	flags['winState'] = true;
 	timeOfWinState = game.time.now;
-
+	gui.upScore(100 * game.global.level);
+	gui.upScore(game.global.lives * 50 + game.global.health);
+	gui.scoreText.previousScore = gui.scoreText.score;
 	bats.callAll('kill');
 }
 

@@ -6,14 +6,20 @@ function addScore(){
     scoreText.strokeThickness = 6;
     scoreText.scoreString = 'Puntaje: ';
     scoreText.score = 0;
+    scoreText.previousScore = 0;
 
     scoreText.upScore = upScore;
     scoreText.setDrawOrder = scoreSetDrawOrder;
     scoreText.setAlive = scoreSetAlive;
     scoreText.restart = restartScoreText;
     scoreText.update = updateScoreText;
+    scoreText.addLevelScore = addLevelScoreText;
 
     return scoreText;
+}
+
+function addLevelScoreText(){
+    this.previousScore = this.score;
 }
 
 function updateScoreText(){
@@ -40,5 +46,5 @@ function scoreSetAlive(value){
 }
 
 function restartScoreText(){
-    this.score = 0;
+    this.score = this.previousScore;
 }

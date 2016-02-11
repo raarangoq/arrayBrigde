@@ -36,7 +36,7 @@ endImage.visible = false;
         boss.reset();
     }
 
-    items = addItem('shield');
+//items = addItem('shield');
 
     platforms.setAlive(true);
     platforms.setPlatforms();
@@ -44,9 +44,9 @@ endImage.visible = false;
     timeOfWinState = game.time.now;
 
     sound_backgroud.play();
-dialog.kill();
+    dialog.kill();
 
-game.time.advancedTiming = true;
+//game.time.advancedTiming = true;
 
     game.global.is_playing = true;
     game.global.timeInitLevel = game.time.now;
@@ -60,7 +60,7 @@ game.time.advancedTiming = true;
     update: function() {
         gui.update();
 
-        if(!flags['winState'] || !game.global.level == 5)
+        if(!(flags['winState'] && game.global.level == 5))
             game.physics.arcade.collide(player, bridge);
 
         
@@ -171,10 +171,10 @@ game.time.advancedTiming = true;
             }
             else{
                 endImage.visible = true;
-                gui.upScore(300);
                 gui.setAlive(false);
             }
         }
+
     },
 
     stoneHitBoss: function(boss, stone){
@@ -237,13 +237,6 @@ game.time.advancedTiming = true;
         player.hitPlayer(boss);
     },
 
-    addAliens: function(){
-        if(game.time.now - player.timeOfLastScorpionAttack > player.timeBetweenScorpionsAttacks){
-            player.hitPlayer(scorpion);
-            player.timeOfLastScorpionAttack = game.time.now;
-        }
-    },
-
     addExplosion: function(x, y){
         var explosion = explosions.getFirstExists(false);
         explosion.reset(x, y);
@@ -251,31 +244,16 @@ game.time.advancedTiming = true;
         boom_sound.play();
     },
 
-   
-
-
-    // Establecer la explosión
-    setupExplosion: function(explosion) {
-        
-    },
-
     setAbility: function(player, item){
         items.takeItem();
     },
-
-    enemyHitsPlayer: function(player, bullet) {
-        
-
-        
-    },
-
     
 
     render: function() {
 
-textb.text = game.time.fps;
+//textb.text =  bats.children[0].x + '\n' + bats.children[0].y;
 
-text.text = platforms.array[0].y;
+//text.text = platforms.array[0].y;
 //game.debug.body(platforms.array[0]);
 //game.debug.body(bridge);
     },
@@ -285,6 +263,7 @@ text.text = platforms.array[0].y;
 
         if (player.alive){
             game.global.level++;
+            gui.addLevelScore();
         }
         else{
             game.global.lives = 3;
@@ -309,8 +288,15 @@ text.text = platforms.array[0].y;
 
         this.restartFlags();
 
-        if(game.global.level == 6)
+        if(game.global.level == 6){
+            ScormProcessSetValue("cmi.core.score.min", 0.0000);
+            ScormProcessSetValue("cmi.core.score.max", 100.0000);
+            ScormProcessSetValue("cmi.core.score.raw", 100);
+            if( ScormProcessGetValue("cmi.comments") < gui.scoreText.score )
+                ScormProcessSetValue("cmi.comments", gui.scoreText.score);
+
             game.global.level = 1;
+        }
 
         game.state.start('levels', false);
         

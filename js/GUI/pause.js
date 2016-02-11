@@ -14,6 +14,7 @@ function addPause(){
 	pause_menu.pages[1] = addPausePage1();
 	pause_menu.pages[2] = addPausePage2();
 	pause_menu.pages[3] = addPausePage3();
+	pause_menu.pages[4] = addPausePage4();
 
 	pause_menu.showPage = showPausePage;
 
@@ -65,8 +66,10 @@ function pauseGame(){
 			gui.timeText.initLevelTime += (game.time.now - this.timeLastPause);
 			game.global.timeInitLevel += (game.time.now - this.timeLastPause);
 			player.shield.initTime += (game.time.now - this.timeLastPause);
-			boss.timeToNextMove += (game.time.now - this.timeLastPause);
-			bats.timeOfLastBat += (game.time.now - this.timeLastPause);
+			player.start_time_hit += (game.time.now - this.timeLastPause);
+			boss.timeOverMove += (game.time.now - this.timeLastPause);
+			bats.timeOfNextBat += (game.time.now - this.timeLastPause);
+			
 		}
 		else{
 			this.visible = true;

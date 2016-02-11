@@ -9,18 +9,17 @@ function addBats(){
 	bats = game.add.group();
     bats.enableBody = true;
     bats.physicsBodyType = Phaser.Physics.ARCADE;
-    bats.createMultiple(3, 'bat');
+    bats.createMultiple(4, 'bat');
     bats.setAll('anchor.x', 0.5);
     bats.setAll('anchor.y', 0.5);
     bats.setAll('outOfBoundsKill', true);
     bats.setAll('checkWorldBounds', true);
     bats.setAll('body.immovable', true);
 
-    bats.timeOfLastBat = game.time.now + 2000;
-    bats.timeBetweenBats = 5000;
+    bats.timeOfNextBat = game.time.now + 2000;
 
     bats.damage = 20;
-    bats.speed = 300;
+    bats.speed = 400;
 
     bats.inGame = false;
 
@@ -46,7 +45,7 @@ function addBatsAnimations(bat){
 }
 
 function resetBats(){
-    this.timeOfLastBat = game.time.now + 2000;
+    this.timeOfNextBat = game.time.now + 2000;
     this.callAll('kill');
     this.setAll('touchPlayer', false);
 }
@@ -56,12 +55,10 @@ function batGroupAttack(){
 	bat = this.getFirstExists(false);
     if (bat)
     {
-        bat.reset(0, 100 + (Math.random() * 300));
+        
         this.setBat(bat);
         this.sound.play();
         game.physics.arcade.moveToXY(bat, bat.xTarget, bat.yTarget, this.speed);
-
-        this.timeOfLastBat = game.time.now + this.timeBetweenBats;
     }
 }
 
@@ -71,9 +68,10 @@ function updateBatsGroup(){
             !game.global.is_playing || game.time.now - game.global.timeInitLevel < 3000)
 		return;
 	
-	if( game.time.now - this.timeOfLastBat > 
-		this.timeBetweenBats - (game.global.level * 800)){
-			this.timeOfLastBat = game.time.now;
+	if( game.time.now > this.timeOfNextBat ){
+
+			this.timeOfNextBat = game.time.now;
+            this.timeOfNextBat += ((2500 / game.global.level) + (Math.random() * 5000));
 			this.attack();
 	}
 
@@ -85,17 +83,23 @@ function updateBatsGroup(){
 *****************************************************/
 
 function setBat(bat){
+    var x = -10;
+    if(Math.random() <= 0.5)
+        x = 810;
+
+    bat.reset(x, 100 + (Math.random() * 400));
     bat.xTarget = player.body.x;
     bat.yTarget = player.body.y;
     bat.touchPlayer = false;
 }
 
 function updateBat(bat){
-	if(	this.touchPlayer || game.physics.arcade.distanceToXY(bat, bat.xTarget, bat.yTarget) <= 10 ){
+/*	if(	this.touchPlayer || game.physics.arcade.distanceToXY(bat, bat.xTarget, bat.yTarget) <= 10 ){
 		bat.xTarget = 900;
 		bat.yTarget = 200 + (Math.random() * 200);
 
 		game.physics.arcade.moveToXY(bat, bat.xTarget, bat.yTarget, this.speed);
 	}
+*/
 }
 

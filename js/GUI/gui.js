@@ -19,6 +19,7 @@ function GUI(){
 
 	this.pauseGame = guiPauseGame;
 	this.upScore = guiUpScore;
+	this.addLevelScore = guiAddLevelScore;
 	this.restartScore = restartScore;
 	this.changeAbility = changeAbility;
 	this.setAlive = guiSetAlive;
@@ -35,6 +36,10 @@ function updateGui(){
 
 function guiUpScore(value){
 	this.scoreText.upScore(value);
+}
+
+function guiAddLevelScore(){
+	this.scoreText.addLevelScore();
 }
 
 function restartScore(){

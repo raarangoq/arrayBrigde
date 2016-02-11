@@ -17,7 +17,7 @@ function addPlatforms(){
 		platforms.array[i].text = platforms.array[i].addChild( game.add.text(20, 5, i, 
     		{ font: '14px ferney', fill: '#fff', stroke: '#000000', strokeThickness: 3 }) );
 
-		platforms.array[i].damage = 30;
+		platforms.array[i].damage = 20;
 	}
 
 	platforms.update = updatePlatforms;
