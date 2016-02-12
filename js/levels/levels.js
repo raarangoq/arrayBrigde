@@ -226,7 +226,7 @@ endImage.visible = false;
     },
 
     attackHitBoss: function(attack, boss){
-        boss.takeDamage(player.hitDamage);
+        boss.takeDamage(0);
     },
 
     playerHitStone: function(player, stone){

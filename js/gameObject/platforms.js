@@ -62,8 +62,10 @@ function setFirePlatforms(){
 	while (i < this.firesPerLevel[game.global.level - 1]){
 		number = Math.floor(Math.random() * 10);
 		if(this.array[number].fire.visible == false){
-			i++;
-			this.array[number].fire.visible = true;
+			if(gui.equation.answers[game.global.level].indexOf(number) == -1){
+				i++;
+				this.array[number].fire.visible = true;
+			}
 		}
 	}
 }

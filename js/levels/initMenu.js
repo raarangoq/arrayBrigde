@@ -89,7 +89,7 @@ initMenu = {
 //text = game.add.text(20, 540, 'Cargando...', { fontSize: '16px', fill: '#ffffff'});
 //textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff'});
 
-	    sound_backgroud = game.add.audio('levelB', 0.5, true);
+	    sound_backgroud = game.add.audio('levelB', 1, true);
 	    boom_sound = game.add.audio('boom', 0.5);
 
 	    dialog = game.add.sprite(230, 300, 'dialog');

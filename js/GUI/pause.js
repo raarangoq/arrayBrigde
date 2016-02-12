@@ -23,12 +23,18 @@ function addPause(){
 	pause_menu.update = pauseMenuUpdate;
 	pause_menu.pauseGame = pauseGame;
 
+	pause_menu.setPrincipalPage = setPrincipalPage;
+
 	return pause_menu;
 }
 
-function pauseMenuUpdate(){
-	this.pages[0].children[0].text = 'Ecuación ' + gui.timeText.counter + ' de ' + gui.equation.numberOfEquations;
+function setPrincipalPage(){
+	this.pages[0].children[0].text = 'Ecuación ' + (gui.timeText.counter + 1) + ' de ' + gui.equation.numberOfEquations;
+	this.pages[0].children[1].text = 'F(X){\n\t\t\tseguro = '+ gui.equation.ai[game.global.level-1] + 
+			' * X % 10; \n\t\t\tF(seguro); \n};' ;
+}
 
+function pauseMenuUpdate(){
 	if(!game.physics.arcade.isPaused)
 		return;
 
@@ -89,7 +95,7 @@ function pauseMenuSetDrawOrder(){
 function pauseMenuSetAlive(value){
     if (value){
         this.revive();
-        this.pages[0].text = 'Level ' + game.global.level;
+        this.pages[0].text = 'Level ' + game.global.level + ', X = ' + gui.equation.x0[game.global.level-1];
     }
     else {
         this.kill();

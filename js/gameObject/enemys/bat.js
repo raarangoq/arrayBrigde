@@ -68,7 +68,7 @@ function updateBatsGroup(){
             !game.global.is_playing || game.time.now - game.global.timeInitLevel < 3000)
 		return;
 	
-	if( game.time.now > this.timeOfNextBat ){
+	if( game.global.lives > 0 && game.time.now > this.timeOfNextBat ){
 
 			this.timeOfNextBat = game.time.now;
             this.timeOfNextBat += ((2500 / game.global.level) + (Math.random() * 5000));

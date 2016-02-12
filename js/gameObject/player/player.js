@@ -345,6 +345,7 @@ function activateShield(){
 function setWinState(){
 
 	flags['winState'] = true;
+	this.body.velocity.setTo(0,0);
 	timeOfWinState = game.time.now;
 	gui.upScore(100 * game.global.level);
 	gui.upScore(game.global.lives * 50 + game.global.health);

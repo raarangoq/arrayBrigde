@@ -19,17 +19,17 @@ function addBoss(){
 
     boss.damage = 70;
     boss.beaten = false;
-    boss.maxHealth = 100;
-    boss.health = boss.maxHealth;
+//    boss.maxHealth = 100;
+//    boss.health = boss.maxHealth;
 
     boss.timeToNextMove = 5000;
     boss.timeOverMove = game.time.now; 
 
     
 
-    boss.healthBar = game.add.sprite(0,  -20, 'enemyBar');
-    boss.healthBar.width = 190;
-    boss.addChild(boss.healthBar);
+//    boss.healthBar = game.add.sprite(0,  -20, 'enemyBar');
+//    boss.healthBar.width = 190;
+//    boss.addChild(boss.healthBar);
 
     boss.killSound = game.add.audio('creature');
     boss.sound = game.add.audio('boss');
@@ -87,12 +87,12 @@ function bossTakeDamage(damage){
     this.beaten = true;
     this.health -= damage;
 
-    this.healthBar.width = 190 * ( this.health / this.maxHealth);
+//    this.healthBar.width = 190 * ( this.health / this.maxHealth);
 
     this.goBack();
 
     if(this.health <= 0){
-        this.healthBar.visible = false;
+//       this.healthBar.visible = false;
 
         this.kill();
         this.killSound.play();
@@ -135,7 +135,7 @@ function resetBoss(){
     this.target = 'pointB';
     this.beaten = false;
     this.health = boss.maxHealth;
-    this.healthBar.width = 190;
+//    this.healthBar.width = 190;
 
     this.timeOverMove = game.time.now; 
     this.inMove = false;

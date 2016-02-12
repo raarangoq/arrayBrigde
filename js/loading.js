@@ -77,7 +77,6 @@ loading = {
     game.load.audio('stone', 'assets/sounds/stone.mp3');
     game.load.audio('door', 'assets/sounds/door.mp3');
 
-    game.load.audio('medusa', 'assets/sounds/medusa-grito.mp3');
 
 	},
 

@@ -44,9 +44,8 @@ function addStones(){
 
 function dropStone(){
     for(var i=0; i<10; i++){
-        if(i == gui.equation.answer)
-            i++;
-        this.dropSingleStone(platforms.array[i].x + platforms.array[i].width / 2);
+        if(i != gui.equation.answer)
+            this.dropSingleStone(platforms.array[i].x + platforms.array[i].width / 2);
     }
     this.sound.play();
 }

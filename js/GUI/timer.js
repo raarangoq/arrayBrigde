@@ -30,7 +30,6 @@ function updateTimer(){
     return;
 
     if(this.counter >= gui.equation.numberOfEquations && game.time.now - this.timeLastEquation >= 4000 ){
-//        alert('entra'); 
         player.setWinState();
         this.restart();
     }
@@ -41,20 +40,17 @@ function updateTimer(){
     var time = Math.floor((this.levelTime - (game.time.now - this.initLevelTime)) / 1000);
     if(time > 0){
     	this.text += time;
-//    	if(time <= 3){
-//            platforms.fireOff();
-//        }
     }
     else{
     	this.text += '0';
         this.counter++;
-        if(this.counter >= gui.equation.numberOfEquations){
+        stones.dropStone();
+        if(this.counter >= gui.equation.numberOfEquations)
             this.timeLastEquation = game.time.now;
-        }
-//        else
-//            platforms.fireOn();
+        else
+            gui.equation.nextAnswer();
+    	
 
-    	stones.dropStone();
         
         this.initLevelTime = game.time.now;
     }
@@ -77,4 +73,5 @@ function timerSetAlive(value){
 function restartTimer(){
     this.initLevelTime = game.time.now;
     this.counter = 0;
+    gui.equation.firstAnswer();
 }
