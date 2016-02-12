@@ -70,7 +70,7 @@ function setFirePlatforms(){
 
 function platformsGoDown(){
 	for(var i=0; i<10; i++){
-		this.array[i].body.gravity.y = 100;
+		this.array[i].body.gravity.y = 250;
 	}
 
 }

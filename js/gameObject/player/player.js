@@ -354,7 +354,8 @@ function setWinState(){
 
 function restartPlayer(){
 	this.x = 00;
-	this.body.velocity.x = this.SPEED_WALKING;
+	this.body.acceleration.setTo(0, 0);
+	this.body.velocity.setTo(this.SPEED_WALKING, 40);
 	this.timeInitLevel = game.time.now;
 	this.play('walk_right');
 	this.y = 200;

@@ -60,8 +60,8 @@ endImage.visible = false;
     update: function() {
         gui.update();
 
-        if(!(flags['winState'] && game.global.level == 5))
-            game.physics.arcade.collide(player, bridge);
+        if(!flags['playedA'])
+        game.physics.arcade.collide(player, bridge);
 
         
 
@@ -117,7 +117,7 @@ endImage.visible = false;
         
         
         for(var i=0; i<10; i++){
-            game.physics.arcade.collide(player, platforms.array[i], this.playerHitPlatform, null, this);
+            game.physics.arcade.overlap(player, platforms.array[i], this.playerHitPlatform, null, this);
             game.physics.arcade.overlap(stones, platforms.array[i], this.stoneHitPlatform, null, this);
         }
 
@@ -194,6 +194,7 @@ endImage.visible = false;
         stone.kill();
 
         if(flags['winState'] && game.global.level == 5){
+            flags['playedA'] = true;
             platforms.goDown();
         }
 
