@@ -6,6 +6,8 @@ function addEquation(){
 	equation.anchor.set(0.5);
 	equation.position.setTo(400, 50);
 
+equation.renderable = false;	
+
 	equation.answers = [];
 	equation.answers[1] = [2, 6];
 	equation.answers[2] = [8, 6, 2];
