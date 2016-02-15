@@ -20,11 +20,15 @@ function addPlatforms(){
 		platforms.array[i].damage = 20;
 	}
 
+	platforms.burning = false;
+
 	platforms.update = updatePlatforms;
 
 	platforms.setPlatforms = setFirePlatforms;
 	platforms.setAlive = setPlatformsAlive;
 	platforms.goDown = platformsGoDown;
+
+	platforms.extinguishFires = extinguishPlatformsFires;
 }
 
 function addFire() {
@@ -48,6 +52,7 @@ function setPlatformsAlive(value){
 			this.array[i].revive();
 			this.array[i].fire.revive();
 			this.array[i].fire.visible = false;
+			platforms.burning = false;
 		}
 		else{
 			this.array[i].kill();
@@ -67,6 +72,14 @@ function setFirePlatforms(){
 				this.array[number].fire.visible = true;
 			}
 		}
+	}
+	platforms.burning = true;
+
+}
+
+function extinguishPlatformsFires(){
+	for(var i=0; i<10; i++){
+		this.array[i].fire.visible = false;
 	}
 }
 

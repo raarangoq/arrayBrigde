@@ -4,13 +4,13 @@ function addPausePage0(){
 		wordWrap: true, wordWrapWidth: 600, align: 'center'});
 	page.anchor.setTo(0.5, 0.5);
 
-	var text = game.add.text(0, 50, 'Ecuación 1 de 2',
+/*	var text = game.add.text(0, 50, 'Ecuación 1 de 2',
 		{ font: "18pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
 		wordWrap: true, wordWrapWidth: 600, align: 'center'});
 	text.anchor.setTo(0.5, 0.5);
 	page.addChild(text);
-
-	text = game.add.text(0, 150, 'F(X){\nseguro = 3 * 4 % 10; \nF(seguro); \n }',
+*/
+	var text = game.add.text(0, 150, 'F(X){\nseguro = 3 * 4 % 10; \nF(seguro); \n }',
 		{ font: "18pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
 		wordWrap: true, wordWrapWidth: 600});
 	text.anchor.setTo(0.5, 0.5);

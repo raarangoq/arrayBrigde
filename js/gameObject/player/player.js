@@ -271,6 +271,9 @@ function updatePlayer(){
 	if(game.physics.arcade.isPaused || game.time.now - game.global.timeInitLevel < 3000)
         return;
 
+    if(!platforms.burning)
+            platforms.setPlatforms();
+
     this.blood.update();
 
 	if(game.time.now - this.start_time_hit > 1500 ){
@@ -350,6 +353,7 @@ function setWinState(){
 	gui.upScore(100 * game.global.level);
 	gui.upScore(game.global.lives * 50 + game.global.health);
 	gui.scoreText.previousScore = gui.scoreText.score;
+	platforms.extinguishFires();
 	bats.callAll('kill');
 }
 

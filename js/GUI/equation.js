@@ -6,7 +6,7 @@ function addEquation(){
 	equation.anchor.set(0.5);
 	equation.position.setTo(400, 50);
 
-equation.renderable = false;	
+equation.visible = false;	
 
 	equation.answers = [];
 	equation.answers[1] = [2, 6];
@@ -32,25 +32,25 @@ equation.renderable = false;
 function firstAnswer(){
 	this.answer = this.answers[game.global.level][0];
 	this.index = 0;
-	this.text = this.answer;
+//	this.text = this.answer;
 	gui.pause_menu.setPrincipalPage();
 }
 
 function nextAnswer(){
 	this.index++;
 	this.answer = this.answers[game.global.level][this.index];
-	this.text = this.answer;
+//	this.text = this.answer;
 	gui.pause_menu.setPrincipalPage();
 }
 
 function equationSetAlive(value){
 	if(value){
-		this.revive();
+//		this.revive();
 		this.numberOfEquations = 1 + game.global.level;
 		this.index = 0;
 		gui.pause_menu.setPrincipalPage();
 	}
-	else{
-		this.kill();
-	}
+//	else{
+//		this.kill();
+//	}
 }

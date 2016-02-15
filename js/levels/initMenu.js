@@ -153,14 +153,24 @@ initMenu = {
 		linkfail.kill();
 
 	    winImage = game.add.sprite(0, 0, 'win');
+	    var text = game.add.text(400, 500, 'Presiona ENTER para ir al siguiente nivel.',
+		{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
+			wordWrap: true, wordWrapWidth: 600, align: 'center'});
+		text.anchor.setTo(0.5, 0.5);
+		winImage.addChild(text);
 	    winImage.visible = false;
 
 	    loseImage = game.add.sprite(0, 0, 'lose');
+	    text = game.add.text(400, 500, 'Presiona ENTER para volver a jugar el anterior nivel...',
+		{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
+			wordWrap: true, wordWrapWidth: 600, align: 'center'});
+		text.anchor.setTo(0.5, 0.5);
+		loseImage.addChild(text);
 	    loseImage.visible = false;
 
 	    endImage = game.add.sprite(0, 0, 'end');
 	    endImage.visible = false;
-	    var text = game.add.text(400, 200, 'GANASTE!!!!\nHaz resuelto todas las ecuaciones, lástima que no lograras escapar a tiempo.',
+	    text = game.add.text(400, 200, 'GANASTE!!!!\nHaz resuelto todas las ecuaciones, lástima que no lograras escapar a tiempo.',
 		{ font: "24pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
 			wordWrap: true, wordWrapWidth: 600, align: 'center'});
 		text.anchor.setTo(0.5, 0.5);

@@ -1,10 +1,10 @@
 
 function addTimer(){
 
-    var timer = game.add.text(500, 10, 'Restante: ', { font: '34px ferney', fill: '#fff' });
+    var timer = game.add.text(400, 10, 'Tiempo restante: ', { font: '34px ferney', fill: '#fff' });
     timer.stroke = '#000000';
     timer.strokeThickness = 6;
-    timer.timerString = 'Restante: ';
+    timer.timerString = 'Tiempo restante: ';
     timer.initLevelTime = game.time.now;
     timer.levelTime = 15000;
 
@@ -29,9 +29,14 @@ function updateTimer(){
         !game.global.is_playing)
     return;
 
-    if(this.counter >= gui.equation.numberOfEquations && game.time.now - this.timeLastEquation >= 4000 ){
-        player.setWinState();
-        this.restart();
+    if(this.counter >= gui.equation.numberOfEquations){
+        if(this.alive){
+            this.setAlive(false);
+        }
+        if(game.time.now - this.timeLastEquation >= 4000 ){
+            player.setWinState();
+            this.restart();
+        }
     }
 
 

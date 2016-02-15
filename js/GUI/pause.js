@@ -29,9 +29,9 @@ function addPause(){
 }
 
 function setPrincipalPage(){
-	this.pages[0].children[0].text = 'Ecuación ' + (gui.timeText.counter + 1) + ' de ' + gui.equation.numberOfEquations;
-	this.pages[0].children[1].text = 'F(X){\n\t\t\tseguro = '+ gui.equation.ai[game.global.level-1] + 
-			' * X % 10; \n\t\t\tF(seguro); \n};' ;
+//	this.pages[0].children[0].text = 'Ecuación ' + (gui.timeText.counter + 1) + ' de ' + gui.equation.numberOfEquations;
+	this.pages[0].children[0].text = 'F(N){\n\t\t\tseguro = ('+ gui.equation.ai[game.global.level-1] + 
+			'N) % 10; \n\t\t\tF(seguro); \n};' ;
 }
 
 function pauseMenuUpdate(){
@@ -95,7 +95,7 @@ function pauseMenuSetDrawOrder(){
 function pauseMenuSetAlive(value){
     if (value){
         this.revive();
-        this.pages[0].text = 'Level ' + game.global.level + ', X = ' + gui.equation.x0[game.global.level-1];
+        this.pages[0].text = 'Level ' + game.global.level + ', comenzando con N = ' + gui.equation.x0[game.global.level-1];
     }
     else {
         this.kill();

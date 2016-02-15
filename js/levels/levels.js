@@ -39,7 +39,6 @@ endImage.visible = false;
 //items = addItem('shield');
 
     platforms.setAlive(true);
-    platforms.setPlatforms();
 
     timeOfWinState = game.time.now;
 
@@ -61,17 +60,14 @@ endImage.visible = false;
         gui.update();
 
         if(!flags['playedA'])
-        game.physics.arcade.collide(player, bridge);
-
-        
+            game.physics.arcade.collide(player, bridge);
 
         if(game.time.now - game.global.timeInitLevel < 3000){
             if( keyboard.enterKey() )
                 gui.pauseGame();
             return;
         }
-            
-
+        
         if (!flags['winState']){
             game.physics.arcade.collide(player, walls[0]);
             game.physics.arcade.collide(player, walls[1]);
@@ -101,7 +97,6 @@ endImage.visible = false;
             }
             else{
                 if( keyboard.enterKey() ){
-
                     this.restart();
                 }
             }
