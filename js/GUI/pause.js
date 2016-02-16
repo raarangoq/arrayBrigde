@@ -4,6 +4,10 @@ function addPause(){
 	pause_menu.fixedToCamera = true;
 	pause_menu.visible = false;
 
+	var signals = game.add.sprite(600, 75, 'signals');
+	signals.scale.setTo(0.5, 0.5);
+	pause_menu.addChild(signals);
+
 	pause_menu.timeLastPause = game.time.now;
 
 	pause_menu.actualPage = 0;
