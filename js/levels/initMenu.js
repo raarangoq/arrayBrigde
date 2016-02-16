@@ -36,6 +36,11 @@ initMenu = {
 	create: function(){
 
 		image = game.add.sprite(0, 0, 'initmenu');
+		var text = game.add.text(400, 150, 'Array Bridge',
+			{ font: "56pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 8, align: 'center'});
+		text.anchor.setTo(0.5, 0.5);
+		image.addChild(text);
+
 		game.global.is_playing = false;
 
 		this.addFlags();
