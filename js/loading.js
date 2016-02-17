@@ -17,7 +17,7 @@ loading = {
     game.load.image('signals', 'assets/pics/GUI/pausesignals.png');
     
 
-    game.load.image('enemyBar', 'assets/pics/enemys/enemyBar.png');
+//    game.load.image('enemyBar', 'assets/pics/enemys/enemyBar.png');
     game.load.spritesheet('stone', 'assets/pics/enemys/stone.png', 50, 143);
     game.load.spritesheet('bat', 'assets/pics/enemys/bat.png', 67, 91);
     game.load.spritesheet('boss', 'assets/pics/enemys/boss.png', 174, 106);

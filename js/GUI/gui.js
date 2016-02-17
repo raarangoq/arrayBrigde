@@ -6,12 +6,10 @@ function GUI(){
 	this.lives_bar = addLivesBar();
 	this.items_bar = new itemsBar();
 	this.equation = addEquation();
-	this.pause_menu = addPause();
 	this.scoreText = addScore();
 	this.timeText = addTimer();
-
+	this.pause_menu = addPause();
 	
-
 	// Metodos
 	this.update = updateGui;
 	this.setDrawOrder = guiSetDrawOrder;

@@ -285,12 +285,12 @@ endImage.visible = false;
         this.restartFlags();
 
         if(game.global.level == 6){
-            ScormProcessSetValue("cmi.core.score.min", 0.0000);
+        /*    ScormProcessSetValue("cmi.core.score.min", 0.0000);
             ScormProcessSetValue("cmi.core.score.max", 100.0000);
             ScormProcessSetValue("cmi.core.score.raw", 100);
             if( ScormProcessGetValue("cmi.comments") < gui.scoreText.score )
                 ScormProcessSetValue("cmi.comments", gui.scoreText.score);
-
+*/
             game.global.level = 1;
         }
 

@@ -36,8 +36,13 @@ initMenu = {
 	create: function(){
 
 		image = game.add.sprite(0, 0, 'initmenu');
-		var text = game.add.text(400, 150, 'Array Bridge',
+		var text = game.add.text(400, 150, "Array's inferno",
 			{ font: "56pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 8, align: 'center'});
+		text.anchor.setTo(0.5, 0.5);
+		image.addChild(text);
+
+		text = game.add.text(400, 500, "Presiona ENTER para jugar...",
+			{ font: "24pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3, align: 'center'});
 		text.anchor.setTo(0.5, 0.5);
 		image.addChild(text);
 
@@ -46,6 +51,10 @@ initMenu = {
 		this.addFlags();
 		
 		sky = game.add.sprite(0, 0, 'video');
+		text = game.add.text(400, 500, "Presiona ENTER para jugar...",
+			{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3, align: 'center'});
+		text.anchor.setTo(0.5, 0.5);
+		sky.addChild(text);
 		sky.kill();
 
 		// GameObjects ever in game

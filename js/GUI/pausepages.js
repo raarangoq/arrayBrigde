@@ -1,5 +1,5 @@
 function addPausePage0(){
-	var page = game.add.text(400, 150, 'Level ' + game.global.level,
+	var page = game.add.text(400, 450, 'Level ' + game.global.level,
 		{ font: "24pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 4,
 		wordWrap: true, wordWrapWidth: 600, align: 'center'});
 	page.anchor.setTo(0.5, 0.5);
@@ -10,14 +10,14 @@ function addPausePage0(){
 	text.anchor.setTo(0.5, 0.5);
 	page.addChild(text);
 */
-	var text = game.add.text(0, 150, 'F(X){\nseguro = 3 * 4 % 10; \nF(seguro); \n }',
+	var text = game.add.text(0, -100, 'F(X){\nseguro = 3 * 4 % 10; \nF(seguro); \n }',
 		{ font: "18pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
 		wordWrap: true, wordWrapWidth: 600});
 	text.anchor.setTo(0.5, 0.5);
 	page.addChild(text);
 
-	text = game.add.text (0, 300, 
-		'Resuelve la ecuación antes de que se agote el tiempo para saber donde pararte y evitar la lluvia de fuego.',
+	text = game.add.text (0, -250, 
+		'La función indica cual es el índice seguro donde debes estar antes que se acabe el tiempo, pero ten en cuenta que es recursiva por lo que cada resultado te servirá para encontrar el siguiente.',
 		{ font: "16pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
 		wordWrap: true, wordWrapWidth: 600, align: 'center'});
 	text.anchor.setTo(0.5, 0.5);
