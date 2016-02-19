@@ -45,7 +45,7 @@
     <style type="text/css">
         @font-face{
         	font-family: 'ferney'; 
-        	src: url('assets/fonts/04B_03__.TTF');
+        	src: url('assets/fonts/04B_03__.TTF') format('truetype');
         	font-weight: normal;
         	font-style: normal;
         }
@@ -59,6 +59,8 @@
 			ScormProcessSetValue("cmi.core.score.raw", "0");
 			ScormProcessSetValue("cmi.core.score.min", "0");
 			ScormProcessSetValue("cmi.core.score.max", "100");*/
+
+			game.state.start('boot');
 		}
 
 		function doUnload(){
