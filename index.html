@@ -5,7 +5,6 @@
 	<title>Array's inferno</title>
 
 	<script type="text/javascript" src="js/phaser.min.js"></script>
-	<script type="text/javascript" src="js/phaser.js"></script>
 	<script type="text/javascript" src="js/scormFunctions.js"></script>
 
 	<script type="text/javascript" src="js/input.js"></script>
@@ -42,6 +41,27 @@
 
 	<script type="text/javascript" src="js/game.js"></script>	
 
+    
+
+    <script type="text/javascript">
+    	function doStart(){
+
+			/*ScormProcessInitialize();
+			API = getAPI();
+
+			ScormProcessSetValue("cmi.core.score.raw", "0");
+			ScormProcessSetValue("cmi.core.score.min", "0");
+			ScormProcessSetValue("cmi.core.score.max", "100");*/
+			
+			game.state.start('boot');
+		}
+
+		function doUnload(){
+			//ScormProcessFinish();
+		}
+
+    </script>
+   
     <style type="text/css">
         @font-face{
         	font-family: 'ferney'; 
@@ -51,25 +71,7 @@
         }
     </style>
 
-    <script type="text/javascript">
-    	function doStart(){
-			/*ScormProcessInitialize();
-			API = getAPI();
-
-			ScormProcessSetValue("cmi.core.score.raw", "0");
-			ScormProcessSetValue("cmi.core.score.min", "0");
-			ScormProcessSetValue("cmi.core.score.max", "100");*/
-
-			game.state.start('boot');
-		}
-
-		function doUnload(){
-			//ScormProcessFinish();
-		}
-
-
-    </script>
-    </script>
+   
 </head>
 <body  onload="doStart();" onunload="doUnload();"  >
   <span id="preload-font"></span>
