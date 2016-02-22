@@ -12,6 +12,8 @@ function addTimer(){
 
     timer.counter = 0;
 
+    timer.sound = game.add.audio('warning', 1, true);
+
     timer.setDrawOrder = timerSetDrawOrder;
     timer.setAlive = timerSetAlive;
     timer.restart = restartTimer;
@@ -43,6 +45,11 @@ function updateTimer(){
     this.text = this.timerString;
 
     var time = Math.floor((this.levelTime - (game.time.now - this.initLevelTime)) / 1000);
+    if(time <= 3 && !this.sound.isPlaying){
+        this.sound.play();
+        this.fill = '#FF0000';
+    }
+
     if(time > 0){
     	this.text += time;
     }
@@ -52,11 +59,13 @@ function updateTimer(){
         stones.dropStone();
         if(this.counter >= gui.equation.numberOfEquations)
             this.timeLastEquation = game.time.now;
-        else
+        else{
             gui.equation.nextAnswer();
-    	
+            
+        }
+        this.fill = '#FFFFFF';
+    	this.sound.stop();
 
-        
         this.initLevelTime = game.time.now;
     }
 }

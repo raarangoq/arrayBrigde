@@ -67,7 +67,8 @@ function setFirePlatforms(){
 	while (i < this.firesPerLevel[game.global.level - 1]){
 		number = Math.floor(Math.random() * 10);
 		if(this.array[number].fire.visible == false){
-			if(gui.equation.answers[game.global.level].indexOf(number) == -1){
+			if(gui.equation.answers[game.global.level].indexOf(number) == -1 && 
+					!game.physics.arcade.overlap(player, this.array[number])){
 				i++;
 				this.array[number].fire.visible = true;
 			}

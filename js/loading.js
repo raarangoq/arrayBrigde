@@ -78,6 +78,8 @@ loading = {
     game.load.audio('stone', 'assets/sounds/stone.mp3');
     game.load.audio('door', 'assets/sounds/door.mp3');
 
+    game.load.audio('warning', 'assets/sounds/alarma.mp3');
+
 
 	},
 

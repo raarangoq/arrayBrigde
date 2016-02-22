@@ -252,7 +252,7 @@ endImage.visible = false;
 
 //text.text = platforms.array[0].y;
 //game.debug.body(platforms.array[0]);
-game.debug.body(boss);
+//game.debug.body(boss);
     },
 
     restart: function() {
