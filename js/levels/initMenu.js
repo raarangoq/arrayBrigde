@@ -103,7 +103,7 @@ initMenu = {
 //text = game.add.text(20, 540, 'Cargando...', { fontSize: '16px', fill: '#ffffff'});
 //textb = game.add.text(20, 200, 'Cargando...', { fontSize: '16px', fill: '#ffffff'});
 
-	    sound_backgroud = game.add.audio('levelB', 1, true);
+	    sound_backgroud = game.add.audio('levelB', 3, true);
 	    boom_sound = game.add.audio('boom', 0.5);
 
 	    dialog = game.add.sprite(230, 300, 'dialog');
@@ -184,7 +184,12 @@ initMenu = {
 
 	    endImage = game.add.sprite(0, 0, 'end');
 	    endImage.visible = false;
-	    text = game.add.text(400, 200, 'GANASTE!!!!\nHaz resuelto todas las ecuaciones, lástima que no lograras escapar a tiempo.',
+	    text = game.add.text(400, 200, 'GANASTE!!!!',
+		{ font: "46pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 7,
+			wordWrap: true, wordWrapWidth: 600, align: 'center'});
+		text.anchor.setTo(0.5, 0.5);
+		endImage.addChild(text);
+	    text = game.add.text(400, 300, 'Haz resuelto todas las ecuaciones, lástima que no lograras escapar a tiempo.',
 		{ font: "24pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
 			wordWrap: true, wordWrapWidth: 600, align: 'center'});
 		text.anchor.setTo(0.5, 0.5);

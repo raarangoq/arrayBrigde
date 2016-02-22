@@ -36,7 +36,7 @@ endImage.visible = false;
         boss.reset();
     }
 
-//items = addItem('shield');
+//items = addItem('velocity');
 
     platforms.setAlive(true);
 
@@ -149,7 +149,7 @@ endImage.visible = false;
         }
         else{
             if(game.time.now - timeOfWinState < 5000){
-                //wait..
+                player.frame = 0;
             }
             else if(game.time.now - timeOfWinState < 6000){
                 if(!flags['winAnimationPointA']){
@@ -180,6 +180,7 @@ endImage.visible = false;
         this.addExplosion(boss.x + 40, boss.y + 40);
     },
 
+
     stoneHitPlatform: function(platform, stone){
         var explosion = crashStones.getFirstExists(false);
         explosion.reset(platform.x + 30, platform.y );
@@ -209,11 +210,11 @@ endImage.visible = false;
         bat.kill();
         gui.upScore(10);
 
-        var prob = Math.random();
         if(items == null){
-            if(prob < 0.2)
+            var prob = Math.random();
+            if(prob < 0.1)
                 items = addItem('shield');
-            else if( prob < 0.4)
+            else if( prob < 0.2)
                 items = addItem('velocity');
         }
 
@@ -251,7 +252,7 @@ endImage.visible = false;
 
 //text.text = platforms.array[0].y;
 //game.debug.body(platforms.array[0]);
-//game.debug.body(bridge);
+game.debug.body(boss);
     },
 
     restart: function() {

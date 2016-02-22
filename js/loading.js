@@ -14,7 +14,6 @@ loading = {
 
     game.load.spritesheet('heart', 'assets/pics/GUI/heart.png', 14, 16);
     game.load.image('healthBar', 'assets/pics/GUI/healthbar.png');
-    game.load.image('signals', 'assets/pics/GUI/pausesignals.png');
     
 
 //    game.load.image('enemyBar', 'assets/pics/enemys/enemyBar.png');
