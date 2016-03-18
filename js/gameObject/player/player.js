@@ -288,6 +288,11 @@ function updatePlayer(){
 		this.body.velocity.y = 0;
 	}
 
+	if(!flags['winState'] && ( this.y < -30 || this.y > 630 || this.x < -30 || this.x > 830 ) ){
+		this.position.setTo(400, 200);
+		this.body.velocity.setTo(0, 0);
+	}
+
 	this.movePlayer();
 	this.attacking();
 

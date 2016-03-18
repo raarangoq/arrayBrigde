@@ -4,10 +4,6 @@ function addPause(){
 	pause_menu.fixedToCamera = true;
 	pause_menu.visible = false;
 
-//	var signals = game.add.sprite(600, 75, 'signals');
-//	signals.scale.setTo(0.5, 0.5);
-//	pause_menu.addChild(signals);
-
 	var text = game.add.text(540, 35, 'Usa <- -> para moverte entre páginas',
 		{ font: "14pt ferney", fill: '#fff', stroke: '#000000', strokeThickness: 3,
 		wordWrap: true, wordWrapWidth: 230});
