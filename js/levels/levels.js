@@ -8,8 +8,8 @@ var textb;
 levels = {
     create: function() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    
-endImage.visible = false; 
+
+    endImage.visible = false;
 
     background.revive();
 
@@ -26,7 +26,7 @@ endImage.visible = false;
 
     bridge.revive();
 
-    
+
 
     stones.reset();
     bats.reset();
@@ -51,10 +51,10 @@ endImage.visible = false;
     game.global.timeInitLevel = game.time.now;
     gui.pauseGame();
 
-    
+
     },
 
-    
+
 
     update: function() {
         gui.update();
@@ -67,13 +67,13 @@ endImage.visible = false;
                 gui.pauseGame();
             return;
         }
-        
+
         if (!flags['winState']){
             game.physics.arcade.collide(player, walls[0]);
             game.physics.arcade.collide(player, walls[1]);
-            
+
             if (player.alive){
-                
+
                 game.physics.arcade.overlap(player, stones, this.playerHitStone, null, this);
                 game.physics.arcade.overlap(player, bats, this.playerHitBat, null, this);
 
@@ -90,10 +90,10 @@ endImage.visible = false;
                 }
 
                 platforms.update();
-                
+
                 if( keyboard.enterKey() )
                     gui.pauseGame();
-                
+
             }
             else{
                 if( keyboard.enterKey() ){
@@ -109,18 +109,18 @@ endImage.visible = false;
             }
         }
 
-        
-        
+
+
         for(var i=0; i<10; i++){
             game.physics.arcade.overlap(player, platforms.array[i], this.playerHitPlatform, null, this);
             game.physics.arcade.overlap(stones, platforms.array[i], this.stoneHitPlatform, null, this);
         }
 
-       
+
     },
 
     playWinAnimation: function(){
-        if (game.global.level < 5){          
+        if (game.global.level < 5){
             if(game.time.now - timeOfWinState < 2000){ //wait
                 if(!flags['winAnimationPointA']){
                     player.body.velocity.x = 0;
@@ -141,10 +141,10 @@ endImage.visible = false;
                 }
             }
             else if(game.time.now - timeOfWinState < 8000){
-                //wait..   
+                //wait..
             }
             else{
-                winImage.visible = true;              
+                winImage.visible = true;
             }
         }
         else{
@@ -244,7 +244,7 @@ endImage.visible = false;
     setAbility: function(player, item){
         items.takeItem();
     },
-    
+
 
     render: function() {
 
@@ -276,7 +276,7 @@ endImage.visible = false;
         items = null;
 
         stones.reset();
-        
+
         winImage.visible = false;
         endImage.visible = false;
         loseImage.visible = false;
@@ -286,17 +286,17 @@ endImage.visible = false;
         this.restartFlags();
 
         if(game.global.level == 6){
-        /*    ScormProcessSetValue("cmi.core.score.min", 0.0000);
+            ScormProcessSetValue("cmi.core.score.min", 0.0000);
             ScormProcessSetValue("cmi.core.score.max", 100.0000);
             ScormProcessSetValue("cmi.core.score.raw", 100);
             if( ScormProcessGetValue("cmi.comments") < gui.scoreText.score )
                 ScormProcessSetValue("cmi.comments", gui.scoreText.score);
-*/
+
             game.global.level = 1;
         }
 
         game.state.start('levels', false);
-        
+
 
     },
 
